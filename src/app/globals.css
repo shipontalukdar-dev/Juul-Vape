@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #09090b;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --card-bg: rgba(0, 0, 0, 0.02);
+  --card-hover: rgba(0, 0, 0, 0.04);
+  --navbar-bg: rgba(255, 255, 255, 0.7);
+  --text-muted: #707070;
+  --accent-color: #2563eb; /* Samsung Blue */
+}
+
+/* Dark mode mapping */
+.dark {
+  --background: #070708;
+  --foreground: #ededed;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.02);
+  --card-hover: rgba(255, 255, 255, 0.05);
+  --navbar-bg: rgba(10, 10, 11, 0.7);
+  --text-muted: #a1a1aa;
+  --accent-color: #10b981; /* Cyber green */
+}
+
+@theme inline {
+  --color-bg-base: var(--background);
+  --color-text-base: var(--foreground);
+  --color-border-base: var(--border-color);
+  --color-card-base: var(--card-bg);
+  --color-card-hover: var(--card-hover);
+  --color-accent-base: var(--accent-color);
+  --font-sans: var(--font-plus-jakarta);
+  --font-display: var(--font-outfit);
+}
+
+body {
+  background-color: var(--background) !important;
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--font-display), system-ui, sans-serif !important;
+}
+
+/* Futuristic custom sleek scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(37, 99, 235, 0.2);
+  border-radius: 99px;
+  border: 1px solid rgba(37, 99, 235, 0.1);
+  transition: all 0.3s;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(37, 99, 235, 0.6);
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.4);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.6);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+}
+
+/* Cyber text glows */
+.neon-glow-emerald {
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+.neon-glow-amber {
+  text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+}
+
+/* 3D Transform Utilities */
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Marquee ticker animation */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
