@@ -138,21 +138,24 @@ export default function FloatingSocials({ theme }) {
           </AnimatePresence>
         </div>
         
-        {/* Label below button (Live chat) */}
-        <AnimatePresence>
-          {!isOpen && (
-            <motion.span
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -5 }}
-              className={`mt-2 text-[11px] font-bold tracking-wide ${
-                isLight ? "text-zinc-600" : "text-zinc-400"
-              }`}
-            >
-              Live chat
-            </motion.span>
-          )}
-        </AnimatePresence>
+        {/* Fixed height container prevents jump */}
+        <div className="h-5 mt-1 flex items-center justify-center">
+          <AnimatePresence>
+            {!isOpen && (
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+                className={`text-[11px] font-bold tracking-wide whitespace-nowrap ${
+                  isLight ? "text-zinc-600" : "text-zinc-400"
+                }`}
+              >
+                Live chat
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </div>
       </button>
 
     </div>
