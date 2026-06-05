@@ -340,7 +340,7 @@ export default function FlashDeals({ theme, onAddToCart }) {
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {repeatedDeals.map((deal, i) => (
-              <div key={`${deal.id}-${i}`} className="w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] snap-center flex-shrink-0">
+              <div key={`${deal.id}-${i}`} className="w-[calc(100vw-48px)] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] snap-center flex-shrink-0">
                 <DealCard
                   deal={deal}
                   isLight={isLight}

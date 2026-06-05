@@ -187,7 +187,7 @@ export default function BestSellers({ onAddToCart, setCurrentPage, setSelectedPr
               return (
                 <div
                   key={`${prod.id}-${idx}`}
-                  className={`group relative rounded-3xl border overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1.5 snap-center flex-shrink-0 w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] ${
+                  className={`group relative rounded-3xl border overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1.5 snap-center flex-shrink-0 w-[calc(100vw-48px)] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] ${
                     isLight
                       ? "bg-white border-zinc-200/80 shadow-[0_2px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_36px_rgba(0,0,0,0.09)]"
                       : "bg-[#111112] border-white/[0.06] hover:border-white/10"
