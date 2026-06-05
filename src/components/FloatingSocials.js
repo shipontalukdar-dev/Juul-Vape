@@ -102,25 +102,41 @@ export default function FloatingSocials({ theme }) {
       {/* Main FAB Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="group flex flex-col items-center justify-center outline-none"
+        className="group flex flex-col items-center justify-center outline-none focus:outline-none"
       >
-        <motion.div
-          animate={{ rotate: isOpen ? 90 : 0 }}
-          transition={{ duration: 0.25, type: "spring", stiffness: 200 }}
-          className={`relative w-[60px] h-[60px] rounded-full flex items-center justify-center shadow-2xl transition-colors duration-300 ${
+        <div
+          className={`relative w-[60px] h-[60px] rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 overflow-hidden ${
             isOpen 
-              ? "bg-[#FF6A00] text-white border-2 border-[#FF6A00]" // Solid orange when open
+              ? "bg-[#FF6A00] border-2 border-[#FF6A00] text-white scale-95"
               : isLight
-                ? "bg-[#0A192F] border-2 border-[#FF6A00] text-[#FF6A00]" // Dark blueish center, orange border
-                : "bg-[#050B14] border-2 border-[#FF6A00] text-[#FF6A00]" // Darker center, orange border
+                ? "bg-[#0A192F] border-2 border-[#FF6A00] text-[#FF6A00]"
+                : "bg-[#050B14] border-2 border-[#FF6A00] text-[#FF6A00]"
           }`}
         >
-          {isOpen ? (
-            <X className="w-7 h-7" strokeWidth={2.5} />
-          ) : (
-            <MessageSquare className="w-7 h-7" strokeWidth={2} />
-          )}
-        </motion.div>
+          <AnimatePresence mode="wait">
+            {isOpen ? (
+              <motion.span
+                key="close"
+                initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                transition={{ duration: 0.2 }}
+              >
+                <X className="w-7 h-7" strokeWidth={2.5} />
+              </motion.span>
+            ) : (
+              <motion.span
+                key="chat"
+                initial={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                exit={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                transition={{ duration: 0.2 }}
+              >
+                <MessageSquare className="w-7 h-7" strokeWidth={2} />
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </div>
         
         {/* Label below button (Live chat) */}
         <AnimatePresence>
