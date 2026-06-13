@@ -63,6 +63,8 @@ export default function Home({
       {/* 5.5 Flash Deals — Special Offers & Discounts */}
       <FlashDeals
         onAddToCart={onAddToCart}
+        setSelectedProduct={setSelectedProduct}
+        setCurrentPage={setCurrentPage}
         theme={theme}
       />
 
@@ -81,6 +83,7 @@ export default function Home({
       <Accessories 
         onAddToCart={onAddToCart}
         setSelectedProduct={setSelectedProduct}
+        setCurrentPage={setCurrentPage}
         theme={theme}
       />
 

@@ -54,13 +54,7 @@ export default function JuulDevice({ flavorColor = "#10B981", activeFlavor = "mi
         ))}
       </div>
 
-      {/* Juul Glow Background */}
-      <motion.div
-        animate={{ scale: [1, 1.05, 1] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        className={`absolute w-48 h-[450px] rounded-full blur-3xl opacity-35 transition-all duration-500 ${activeTheme.glow}`}
-        style={{ backgroundColor: flavorColor }}
-      />
+
 
       {/* The Physical Device Container (Now showcasing the real image!) */}
       <motion.div 

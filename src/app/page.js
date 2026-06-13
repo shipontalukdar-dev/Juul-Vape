@@ -23,8 +23,8 @@ export default function MainApp() {
   const [isLoading, setIsLoading] = useState(true);
 
   const setCurrentPage = (page) => {
-    if (page === "home") {
-      _setCurrentPage("home");
+    if (["home", "collection", "product", "checkout"].includes(page)) {
+      _setCurrentPage(page);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       setShowComingSoon(true);

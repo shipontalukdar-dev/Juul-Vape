@@ -47,7 +47,7 @@ export default function FloatingSocials({ theme }) {
   const isLight = theme === "light";
 
   return (
-    <div className="fixed right-6 bottom-6 z-[100] flex flex-col items-center">
+    <div className="fixed right-6 bottom-20 lg:bottom-6 z-45 flex flex-col items-center">
       
       {/* Expanded Menu Options */}
       <AnimatePresence>

@@ -100,16 +100,37 @@ function TimeBlock({ value, label, isLight }) {
   );
 }
 
-function DealCard({ deal, isLight, onAddToCart, index }) {
+function DealCard({ deal, isLight, onAddToCart, index, onProductClick }) {
   const [added, setAdded] = useState(false);
   const savings = (deal.originalPrice - deal.salePrice).toFixed(2);
 
-  const handleAdd = () => {
+  const handleProductClick = () => {
+    if (onProductClick) {
+      onProductClick({
+        id: deal.id,
+        name: deal.name,
+        category: deal.id === "deal-4" ? "accessories" : "kits",
+        price: deal.salePrice,
+        originalPrice: deal.originalPrice,
+        rating: 4.9,
+        reviewsCount: 84,
+        imgColor: deal.accentColor,
+        image: deal.image,
+        tag: deal.badge,
+        desc: deal.desc
+      });
+    }
+  };
+
+  const handleAdd = (e) => {
+    e.stopPropagation();
     if (onAddToCart) {
       onAddToCart({
         id: deal.id,
         name: deal.name,
         price: deal.salePrice,
+        image: deal.image,
+        imgColor: deal.accentColor
       });
     }
     setAdded(true);
@@ -148,9 +169,12 @@ function DealCard({ deal, isLight, onAddToCart, index }) {
       )}
 
       {/* Product Image */}
-      <div className={`relative w-full h-48 overflow-hidden ${
-        isLight ? "bg-zinc-50" : "bg-zinc-900/50"
-      }`}>
+      <div 
+        onClick={handleProductClick}
+        className={`relative w-full h-48 overflow-hidden cursor-pointer ${
+          isLight ? "bg-zinc-50" : "bg-zinc-900/50"
+        }`}
+      >
         <motion.div
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
@@ -168,12 +192,15 @@ function DealCard({ deal, isLight, onAddToCart, index }) {
 
       {/* Content */}
       <div className="flex flex-col gap-3 p-5 flex-1 justify-between">
-        <div className="space-y-1.5">
+        <div className="space-y-1.5 text-left">
           {/* Badge */}
           <span className={`text-[9px] font-black uppercase tracking-widest`}>
             {deal.badge}
           </span>
-          <h3 className={`text-sm font-black leading-snug ${isLight ? "text-zinc-950" : "text-white"}`}>
+          <h3 
+            onClick={handleProductClick}
+            className={`text-sm font-black leading-snug cursor-pointer hover:underline ${isLight ? "text-zinc-950" : "text-white"}`}
+          >
             {deal.name}
           </h3>
           <p className={`text-[11px] font-light leading-relaxed ${isLight ? "text-zinc-500" : "text-zinc-400"}`}>
@@ -221,7 +248,7 @@ function DealCard({ deal, isLight, onAddToCart, index }) {
   );
 }
 
-export default function FlashDeals({ theme, onAddToCart }) {
+export default function FlashDeals({ theme, onAddToCart, setSelectedProduct, setCurrentPage }) {
   const { h, m, s } = useCountdown();
   const isLight = theme === "light";
   const scrollRef = useRef(null);
@@ -261,6 +288,16 @@ export default function FlashDeals({ theme, onAddToCart }) {
       } else {
         scrollRef.current.scrollBy({ left: 320, behavior: 'smooth' });
       }
+    }
+  };
+
+  const handleProductClick = (prod) => {
+    if (setSelectedProduct) {
+      setSelectedProduct(prod);
+    }
+    if (setCurrentPage) {
+      setCurrentPage("product");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -346,6 +383,7 @@ export default function FlashDeals({ theme, onAddToCart }) {
                   isLight={isLight}
                   onAddToCart={onAddToCart}
                   index={i}
+                  onProductClick={handleProductClick}
                 />
               </div>
             ))}

@@ -5,7 +5,7 @@ import { ShoppingBag, ChevronLeft, ChevronRight, Star } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-export default function Accessories({ onAddToCart, setSelectedProduct, theme }) {
+export default function Accessories({ onAddToCart, setSelectedProduct, setCurrentPage, theme }) {
   const isLight = theme === "light";
   const scrollRef = useRef(null);
   const [isPaused, setIsPaused] = useState(false);
@@ -130,6 +130,10 @@ export default function Accessories({ onAddToCart, setSelectedProduct, theme }) 
   const handleProductClick = (prod) => {
     if (setSelectedProduct) {
       setSelectedProduct(prod);
+    }
+    if (setCurrentPage) {
+      setCurrentPage("product");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
