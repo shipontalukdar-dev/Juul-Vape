@@ -10,6 +10,8 @@ import ProductReviews from "./ProductReviews";
 import ProductRecommendations from "./ProductRecommendations";
 import ProductFeatures from "./ProductFeatures";
 import ProductRichDescription from "./ProductRichDescription";
+import ProductTechSpecs from "./ProductTechSpecs";
+import FAQ from "./FAQ";
 
 export default function ProductDetail({ selectedProduct, onAddToCart, setCurrentPage, theme }) {
   const isLight = theme === "light";
@@ -493,6 +495,12 @@ export default function ProductDetail({ selectedProduct, onAddToCart, setCurrent
           theme={theme}
         />
 
+        {/* Technical Specifications */}
+        <ProductTechSpecs 
+          product={product} 
+          theme={theme} 
+        />
+
         {/* You May Also Like Suggestions */}
         <ProductRecommendations
           category={product.category}
@@ -509,6 +517,9 @@ export default function ProductDetail({ selectedProduct, onAddToCart, setCurrent
           productName={product.name}
           theme={theme}
         />
+
+        {/* FAQ Section */}
+        <FAQ theme={theme} />
 
       </div>
 

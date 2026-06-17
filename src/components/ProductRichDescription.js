@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ShieldAlert, Sparkles, CheckSquare, Zap, Leaf, Truck, RefreshCcw } from "lucide-react";
+import { ShieldAlert, Sparkles, CheckSquare, Zap, Leaf, Truck, RefreshCcw, Droplet } from "lucide-react";
 
 export default function ProductRichDescription({ product, theme }) {
   const isLight = theme === "light";
@@ -203,7 +203,7 @@ export default function ProductRichDescription({ product, theme }) {
         </div>
       </motion.div>
 
-      {/* ═══ SECTION 3: USB CHARGER ═══ */}
+      {/* ═══ SECTION 3: HOW TO CHECK BATTERY ═══ */}
       <motion.div 
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} 
         variants={containerVariants}
@@ -211,42 +211,48 @@ export default function ProductRichDescription({ product, theme }) {
       >
         <div className="lg:col-span-7 space-y-6">
           <motion.div variants={textItemVariants} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/20">
-            <Sparkles className="w-4 h-4 text-emerald-500" />
-            <span className="text-[10px] font-black uppercase tracking-[0.15em] text-emerald-600 dark:text-emerald-400">Power Delivery</span>
+            <Zap className="w-4 h-4 text-emerald-500" />
+            <span className="text-[10px] font-black uppercase tracking-[0.15em] text-emerald-600 dark:text-emerald-400">Battery Status</span>
           </motion.div>
           
           <motion.h3 variants={textItemVariants} className={`text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter leading-[1.05] ${isLight ? "text-zinc-950" : "text-white"}`}>
-            Compact <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400">USB Charger</span>
+            Tap to Check <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400">Battery Level</span>
           </motion.h3>
           
           <motion.p variants={textItemVariants} className={`text-base font-medium leading-relaxed ${isLight ? "text-zinc-600" : "text-zinc-400"}`}>
-            Experience ultimate portability for life on the go. The USB charger features an impact-resistant polymer housing and a standard Type-A USB connector that fits anywhere. The gold-plated pogo-pin contacts ensure a rapid, uninterrupted charge, extending the lifespan of your battery.
+            Stay in control of your device's power. Simply double-tap the body of the device to instantly reveal your current battery status through the smart LED indicator. Knowing your charge level has never been more intuitive.
           </motion.p>
 
           <motion.div variants={textItemVariants} className="space-y-3 pt-2">
             <div className="flex items-center gap-3 text-sm font-bold">
-              <div className="w-6 h-6 rounded-full bg-emerald-500/10 flex items-center justify-center">
-                <CheckSquare className="w-3.5 h-3.5 text-emerald-500" />
+              <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center">
+                <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
               </div>
-              <span className={isLight ? "text-zinc-800" : "text-zinc-200"}>Magnetic Docking</span>
+              <span className={isLight ? "text-zinc-800" : "text-zinc-200"}>Green: High Charge &gt;50%</span>
             </div>
             <div className="flex items-center gap-3 text-sm font-bold">
-              <div className="w-6 h-6 rounded-full bg-emerald-500/10 flex items-center justify-center">
-                <CheckSquare className="w-3.5 h-3.5 text-emerald-500" />
+              <div className="w-6 h-6 rounded-full bg-yellow-500/20 flex items-center justify-center">
+                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
               </div>
-              <span className={isLight ? "text-zinc-800" : "text-zinc-200"}>Fast Charge Support</span>
+              <span className={isLight ? "text-zinc-800" : "text-zinc-200"}>Yellow: Medium Charge 25-50%</span>
+            </div>
+            <div className="flex items-center gap-3 text-sm font-bold">
+              <div className="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+              </div>
+              <span className={isLight ? "text-zinc-800" : "text-zinc-200"}>Red: Low Charge &lt;25%</span>
             </div>
           </motion.div>
         </div>
 
         <motion.div variants={imageContainerVariants} className="lg:col-span-5 h-[350px] sm:h-[450px] lg:h-[550px] w-full relative">
           <div className={`w-full h-full relative rounded-[2rem] overflow-hidden group ${imageBgClassName}`}>
-            <Image src="/media__1781699609816.png" alt="USB Charger" fill className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out" sizes="(max-width: 1024px) 100vw, 50vw" />
+            <Image src="/battery-check.png" alt="How to Check Battery Status" fill className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out" sizes="(max-width: 1024px) 100vw, 50vw" />
           </div>
         </motion.div>
       </motion.div>
 
-      {/* ═══ SECTION 4: MTL DRAW ═══ */}
+      {/* ═══ SECTION 4: HEXAGONAL WINDOW ═══ */}
       <motion.div 
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} 
         variants={containerVariants}
@@ -254,32 +260,32 @@ export default function ProductRichDescription({ product, theme }) {
       >
         <motion.div variants={imageContainerVariants} className="lg:col-span-5 lg:order-last h-[350px] sm:h-[450px] lg:h-[550px] w-full relative">
           <div className={`w-full h-full relative rounded-[2rem] overflow-hidden group ${imageBgClassName}`}>
-            <Image src="/media__1781699611995.png" alt="MTL Draw" fill className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out" sizes="(max-width: 1024px) 100vw, 50vw" />
+            <Image src="/e liquid level.jpeg" alt="Hexagonal Window" fill className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out" sizes="(max-width: 1024px) 100vw, 50vw" />
           </div>
         </motion.div>
 
         <div className="lg:col-span-7 space-y-6">
           <motion.div variants={textItemVariants} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20">
-            <Leaf className="w-4 h-4 text-purple-500" />
-            <span className="text-[10px] font-black uppercase tracking-[0.15em] text-purple-600 dark:text-purple-400">Authentic Feel</span>
+            <Droplet className="w-4 h-4 text-purple-500" />
+            <span className="text-[10px] font-black uppercase tracking-[0.15em] text-purple-600 dark:text-purple-400">E-Liquid Visibility</span>
           </motion.div>
           
           <motion.h3 variants={textItemVariants} className={`text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter leading-[1.05] ${isLight ? "text-zinc-950" : "text-white"}`}>
-            Mouth-To-Lung <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">(MTL) Draw</span>
+            Hexagonal <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">Liquid Window</span>
           </motion.h3>
           
           <motion.p variants={textItemVariants} className={`text-base font-medium leading-relaxed ${isLight ? "text-zinc-600" : "text-zinc-400"}`}>
-            Designed specifically for the traditional smoker feel. The unique airflow inlet creates a two-stage process: a smooth mouth draw followed by satisfying lung inhalation. The vapor delivery tube channels the mist perfectly from the vaporization chamber right to the mouthpiece.
+            Never run out unexpectedly. The perfectly crafted hexagonal viewing window provides clear, instant visibility of your remaining e-liquid level without having to remove the pod from the device. Keep track of your usage seamlessly.
           </motion.p>
 
           <motion.div variants={textItemVariants} className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
             <div className={`p-5 rounded-2xl border transition-colors ${isLight ? "bg-white border-zinc-200 shadow-sm hover:border-zinc-300" : "bg-zinc-900/40 border-white/5 hover:border-white/10"}`}>
-              <h5 className={`text-sm font-black mb-1.5 ${isLight ? "text-zinc-950" : "text-white"}`}>Stage 1: Mouth Draw</h5>
-              <p className={`text-xs font-medium leading-relaxed ${isLight ? "text-zinc-500" : "text-zinc-400"}`}>Gathers rich, concentrated flavor in the mouth first.</p>
+              <h5 className={`text-sm font-black mb-1.5 ${isLight ? "text-zinc-950" : "text-white"}`}>Instant Checking</h5>
+              <p className={`text-xs font-medium leading-relaxed ${isLight ? "text-zinc-500" : "text-zinc-400"}`}>A quick glance is all it takes to see exactly how much liquid is left in your pod.</p>
             </div>
             <div className={`p-5 rounded-2xl border transition-colors ${isLight ? "bg-white border-zinc-200 shadow-sm hover:border-zinc-300" : "bg-zinc-900/40 border-white/5 hover:border-white/10"}`}>
-              <h5 className={`text-sm font-black mb-1.5 ${isLight ? "text-zinc-950" : "text-white"}`}>Stage 2: Lung Inhale</h5>
-              <p className={`text-xs font-medium leading-relaxed ${isLight ? "text-zinc-500" : "text-zinc-400"}`}>Delivers the expected nicotine hit smoothly and comfortably.</p>
+              <h5 className={`text-sm font-black mb-1.5 ${isLight ? "text-zinc-950" : "text-white"}`}>Smart Design</h5>
+              <p className={`text-xs font-medium leading-relaxed ${isLight ? "text-zinc-500" : "text-zinc-400"}`}>The geometric shape maximizes viewing area while maintaining structural strength.</p>
             </div>
           </motion.div>
         </div>
