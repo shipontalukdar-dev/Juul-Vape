@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   Heart,
   Phone,
@@ -13,7 +14,7 @@ import {
   AlertTriangle
 } from "lucide-react";
 
-export default function Footer({ setCurrentPage, theme }) {
+export default function Footer({ theme }) {
   const isLight = theme === "light";
   const [copiedText, setCopiedText] = useState("");
 
@@ -34,11 +35,8 @@ export default function Footer({ setCurrentPage, theme }) {
 
         {/* Column 1: Brand & Description & Socials */}
         <div className="lg:col-span-3 space-y-4 text-left lg:border-r border-zinc-200/60 dark:border-white/5 lg:pr-6">
-          <div
-            onClick={() => {
-              setCurrentPage("home");
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
+          <Link
+            href="/"
             className="cursor-pointer flex items-center gap-1 group w-fit select-none"
           >
             <span className="text-base font-black tracking-wider transition-colors font-outfit">
@@ -46,16 +44,16 @@ export default function Footer({ setCurrentPage, theme }) {
               <span className={isLight ? "text-zinc-950 group-hover:text-red-500" : "text-white group-hover:text-red-400"}>POD</span>
               <span className="relative text-red-500 group-hover:text-red-400">
                 S
-                <svg 
-                  className="absolute -top-1.5 -right-3 w-3 h-5 text-red-500 overflow-visible" 
-                  viewBox="0 0 16 24" 
-                  fill="none" 
+                <svg
+                  className="absolute -top-1.5 -right-3 w-3 h-5 text-red-500 overflow-visible"
+                  viewBox="0 0 16 24"
+                  fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <path 
-                    d="M1 23C3 18 2 15 5 11C8 7 11 5 7 1" 
-                    stroke="currentColor" 
-                    strokeWidth="2.5" 
+                  <path
+                    d="M1 23C3 18 2 15 5 11C8 7 11 5 7 1"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
                     strokeLinecap="round"
                     className="animate-pulse"
                   />
@@ -63,7 +61,7 @@ export default function Footer({ setCurrentPage, theme }) {
               </span>
             </span>
             <span className="w-1.5 h-1.5 rounded-full animate-ping bg-red-500 ml-3.5" />
-          </div>
+          </Link>
 
           <p className="leading-relaxed font-medium">
             Shop premium engineered nicotine inhalation systems. Strictly delivering certified authentic hardware and vapor blend collections across the UAE.
@@ -111,7 +109,7 @@ export default function Footer({ setCurrentPage, theme }) {
                 iconBg: "bg-black/5 dark:bg-white/10 text-black dark:text-white",
                 icon: (
                   <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
                   </svg>
                 ),
                 url: "https://tiktok.com/@juuluae"
@@ -122,11 +120,10 @@ export default function Footer({ setCurrentPage, theme }) {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex items-center gap-2.5 p-2 rounded-xl border transition-all duration-300 group ${
-                  isLight 
-                    ? "bg-white border-zinc-200 hover:bg-zinc-50 shadow-sm" 
+                className={`flex items-center gap-2.5 p-2 rounded-xl border transition-all duration-300 group ${isLight
+                    ? "bg-white border-zinc-200 hover:bg-zinc-50 shadow-sm"
                     : "bg-zinc-900/50 border-white/5 hover:bg-zinc-900"
-                } ${social.activeBorder}`}
+                  } ${social.activeBorder}`}
                 aria-label={social.name}
               >
                 <div className={`w-7 h-7 rounded-lg flex shrink-0 items-center justify-center transition-all ${social.iconBg}`}>
@@ -147,39 +144,20 @@ export default function Footer({ setCurrentPage, theme }) {
           </h4>
           <ul className="space-y-2 text-xs font-semibold">
             {[
-              { label: "Home", action: () => setCurrentPage("home") },
-              { label: "Shop", action: () => setCurrentPage("collection") },
-              {
-                label: "About Us", action: () => {
-                  setCurrentPage("home");
-                  setTimeout(() => {
-                    document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
-                  }, 150);
-                }
-              },
-              {
-                label: "FAQ", action: () => {
-                  setCurrentPage("home");
-                  setTimeout(() => {
-                    document.getElementById("faq")?.scrollIntoView({ behavior: "smooth" });
-                  }, 150);
-                }
-              },
-              { label: "Privacy", action: () => setCurrentPage("home") },
-              { label: "Terms", action: () => setCurrentPage("home") }
+              { label: "Home", href: "/" },
+              { label: "Shop", href: "/juul2" },
+              { label: "About Us", href: "/about" },
+              { label: "FAQ", href: "/#faq" },
+              { label: "Privacy", href: "/" },
+              { label: "Terms", href: "/" }
             ].map((link, idx) => (
               <li key={idx}>
-                <button
-                  onClick={() => {
-                    link.action();
-                    if (link.label !== "About Us" && link.label !== "FAQ") {
-                      window.scrollTo({ top: 0, behavior: "smooth" });
-                    }
-                  }}
+                <Link
+                  href={link.href}
                   className={`transition-colors cursor-pointer text-left block w-full ${isLight ? "hover:text-blue-600 text-zinc-500" : "hover:text-emerald-400 text-zinc-450"}`}
                 >
                   {link.label}
-                </button>
+                </Link>
               </li>
             ))}
           </ul>
@@ -192,23 +170,20 @@ export default function Footer({ setCurrentPage, theme }) {
           </h4>
           <ul className="space-y-2 text-xs font-semibold">
             {[
-              { name: "JUUL 2 Devices", page: "collection" },
-              { name: "JUUL 2 Pods", page: "collection" },
-              { name: "JUUL 1 Devices", page: "juul1" },
-              { name: "JUUL 1 Pods", page: "juul1" },
-              { name: "Starter Kits", page: "collection" },
-              { name: "All Products", page: "collection" }
+              { name: "JUUL 2 Devices", href: "/juul2" },
+              { name: "JUUL 2 Pods", href: "/juul2" },
+              { name: "JUUL 1 Devices", href: "/juul1" },
+              { name: "JUUL 1 Pods", href: "/juul1" },
+              { name: "Starter Kits", href: "/juul2" },
+              { name: "All Products", href: "/juul2" }
             ].map((item, idx) => (
               <li key={idx}>
-                <button
-                  onClick={() => {
-                    setCurrentPage(item.page);
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                  }}
+                <Link
+                  href={item.href}
                   className={`transition-colors cursor-pointer block w-full text-left ${isLight ? "hover:text-blue-600 text-zinc-500" : "hover:text-emerald-400 text-zinc-450"}`}
                 >
                   {item.name}
-                </button>
+                </Link>
               </li>
             ))}
           </ul>
@@ -230,11 +205,10 @@ export default function Footer({ setCurrentPage, theme }) {
             ].map((phone) => (
               <div
                 key={phone.id}
-                className={`flex items-center justify-between px-3 py-2 rounded-xl border transition-all ${
-                  isLight 
-                    ? "bg-white border-zinc-200 hover:border-blue-200 hover:bg-blue-50/50 shadow-sm" 
+                className={`flex items-center justify-between px-3 py-2 rounded-xl border transition-all ${isLight
+                    ? "bg-white border-zinc-200 hover:border-blue-200 hover:bg-blue-50/50 shadow-sm"
                     : "bg-zinc-900/50 border-white/5 hover:border-emerald-500/20 hover:bg-emerald-950/20"
-                }`}
+                  }`}
               >
                 <div className="flex items-center gap-2.5">
                   <div className={`p-1 rounded-md ${isLight ? "bg-blue-100 text-blue-600" : "bg-emerald-500/10 text-emerald-400"}`}>
@@ -246,13 +220,12 @@ export default function Footer({ setCurrentPage, theme }) {
                 </div>
                 <button
                   onClick={() => handleCopy(phone.number, phone.id)}
-                  className={`p-1.5 rounded-lg transition-all cursor-pointer ${
-                    copiedText === phone.id
+                  className={`p-1.5 rounded-lg transition-all cursor-pointer ${copiedText === phone.id
                       ? "bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400"
-                      : isLight 
-                        ? "bg-zinc-100 text-zinc-500 hover:bg-blue-100 hover:text-blue-700" 
+                      : isLight
+                        ? "bg-zinc-100 text-zinc-500 hover:bg-blue-100 hover:text-blue-700"
                         : "bg-zinc-800 text-zinc-400 hover:bg-emerald-900/40 hover:text-emerald-400"
-                  }`}
+                    }`}
                   title="Copy Number"
                 >
                   {copiedText === phone.id ? (
@@ -299,8 +272,8 @@ export default function Footer({ setCurrentPage, theme }) {
               type="email"
               placeholder="Newsletter Email"
               className={`w-full text-[11px] py-1.5 pl-3 pr-8 rounded-lg border transition-all focus:outline-none ${isLight
-                  ? "bg-white border-zinc-200 text-zinc-900 focus:border-blue-600"
-                  : "bg-white/5 border-white/10 text-white focus:border-emerald-400"
+                ? "bg-white border-zinc-200 text-zinc-900 focus:border-blue-600"
+                : "bg-white/5 border-white/10 text-white focus:border-emerald-400"
                 }`}
             />
             <button className={`absolute right-1.5 p-1 rounded transition-all cursor-pointer ${isLight ? "text-blue-650 hover:text-blue-800" : "text-emerald-400 hover:text-emerald-300"
@@ -317,19 +290,16 @@ export default function Footer({ setCurrentPage, theme }) {
         }`}>
 
         {/* Warning Badge - Luxury Editorial Style with Color Accent */}
-        <div className={`py-6 border-y max-w-3xl mx-auto transition-all text-center space-y-2 ${
-          isLight 
-            ? "border-red-200/50" 
+        <div className={`py-6 border-y max-w-3xl mx-auto transition-all text-center space-y-2 ${isLight
+            ? "border-red-200/50"
             : "border-red-950/20"
-        }`}>
-          <p className={`font-black uppercase tracking-[0.25em] text-[10px] ${
-            isLight ? "text-red-600" : "text-red-400"
           }`}>
+          <p className={`font-black uppercase tracking-[0.25em] text-[10px] ${isLight ? "text-red-600" : "text-red-400"
+            }`}>
             Government Warning
           </p>
-          <p className={`text-[11px] sm:text-xs font-semibold tracking-wide max-w-2xl mx-auto leading-relaxed ${
-            isLight ? "text-zinc-650" : "text-zinc-400"
-          }`}>
+          <p className={`text-[11px] sm:text-xs font-semibold tracking-wide max-w-2xl mx-auto leading-relaxed ${isLight ? "text-zinc-650" : "text-zinc-400"
+            }`}>
             This product contains <span className={isLight ? "text-red-600" : "text-red-400"}>nicotine</span>. Nicotine is an <span className={isLight ? "text-red-650" : "text-red-450"}>addictive chemical</span>. Underage sales are strictly prohibited. Verified adult smokers only. <span className={isLight ? "text-red-600" : "text-red-400"}>Age 21+</span> strictly verified at delivery.
           </p>
         </div>
@@ -341,30 +311,24 @@ export default function Footer({ setCurrentPage, theme }) {
           </p>
 
           <div className="flex items-center gap-6 font-bold">
-            <button
-              onClick={() => {
-                setCurrentPage("home");
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
+            <Link
+              href="/"
               className={`transition-colors cursor-pointer ${isLight ? "hover:text-blue-600 text-zinc-500" : "hover:text-emerald-400 text-zinc-450"}`}
             >
               Terms
-            </button>
-            <button
-              onClick={() => {
-                setCurrentPage("home");
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
+            </Link>
+            <Link
+              href="/"
               className={`transition-colors cursor-pointer ${isLight ? "hover:text-blue-600 text-zinc-500" : "hover:text-emerald-400 text-zinc-450"}`}
             >
               Privacy
-            </button>
+            </Link>
 
             <button
               onClick={scrollToTop}
               className={`p-2 rounded-full border transition-all cursor-pointer hover:scale-105 active:scale-95 flex items-center justify-center ${isLight
-                  ? "bg-white border-zinc-200 text-zinc-700 hover:text-blue-650 hover:bg-zinc-50 hover:border-blue-200 shadow-sm"
-                  : "bg-white/5 border-white/10 text-zinc-350 hover:text-emerald-400 hover:bg-white/10 hover:border-emerald-500/20"
+                ? "bg-white border-zinc-200 text-zinc-700 hover:text-blue-650 hover:bg-zinc-50 hover:border-blue-200 shadow-sm"
+                : "bg-white/5 border-white/10 text-zinc-350 hover:text-emerald-400 hover:bg-white/10 hover:border-emerald-500/20"
                 }`}
               title="Scroll to top"
             >

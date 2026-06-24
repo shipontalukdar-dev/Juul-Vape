@@ -2,15 +2,16 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Trash2, ArrowRight, ShoppingBag } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-export default function CartDrawer({ isOpen, onClose, cart, onRemoveFromCart, setCurrentPage, theme }) {
+export default function CartDrawer({ isOpen, onClose, cart, onRemoveFromCart, theme }) {
   const total = cart.reduce((sum, item) => sum + parseFloat(item.price), 0);
-
+  const router = useRouter();
   const isLight = theme === "light";
 
   const handleCheckoutClick = () => {
     onClose();
-    setCurrentPage("checkout");
+    router.push("/checkout");
   };
 
   return (

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ShoppingCart, Star, Shield, ArrowLeft, Check, CheckCircle2, Truck, Award, ChevronDown, ChevronRight, Clock } from "lucide-react";
@@ -216,17 +218,16 @@ export default function ProductDetail({ selectedProduct, onAddToCart, setCurrent
     setSelectedAddons([]);
   };
 
+  const router = useRouter();
+
   const handleBuyNow = () => {
     handleAddToCart();
-    if (setCurrentPage) {
-      setCurrentPage("checkout");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    router.push("/checkout");
   };
 
   const handleProductRecommendationClick = (newProduct) => {
-    if (newProduct) {
-      setCurrentPage("product");
+    if (newProduct?.id) {
+      router.push(`/product/${newProduct.id}`);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
@@ -243,29 +244,23 @@ export default function ProductDetail({ selectedProduct, onAddToCart, setCurrent
       <div className="max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Breadcrumb Navigation Trail */}
         <nav className="flex flex-wrap items-center gap-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-3 sm:mb-4 select-none">
-          <button 
-            onClick={() => {
-              setCurrentPage("home");
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
+          <Link
+            href="/"
             className={`transition-colors cursor-pointer ${
               isLight ? "text-zinc-400 hover:text-zinc-950" : "text-zinc-500 hover:text-white"
             }`}
           >
             Home
-          </button>
+          </Link>
           <ChevronRight className="w-3.5 h-3.5 text-zinc-500" />
-          <button 
-            onClick={() => {
-              setCurrentPage("collection");
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
+          <Link
+            href={product.version === "juul1" ? "/juul1" : "/juul2"}
             className={`transition-colors cursor-pointer ${
               isLight ? "text-zinc-400 hover:text-zinc-950" : "text-zinc-500 hover:text-white"
             }`}
           >
-            Collection
-          </button>
+            {product.version === "juul1" ? "JUUL 1" : "JUUL 2"}
+          </Link>
           <ChevronRight className="w-3.5 h-3.5 text-zinc-500" />
           <span className={`capitalize ${isLight ? "text-zinc-450" : "text-zinc-450"}`}>
             {product.category}

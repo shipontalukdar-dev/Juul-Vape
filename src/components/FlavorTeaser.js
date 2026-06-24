@@ -95,20 +95,19 @@ export default function FlavorTeaser({ setCurrentPage, theme }) {
   const isLight = theme === "light";
 
   return (
-    <section className={`py-24 border-y transition-colors duration-500 relative overflow-hidden ${
-      isLight ? "bg-zinc-50 border-zinc-200/80" : "bg-[#0A0A0B] border-white/5"
-    }`}>
+    <section className={`py-24 border-y transition-colors duration-500 relative overflow-hidden ${isLight ? "bg-zinc-50 border-zinc-200/80" : "bg-[#0A0A0B] border-white/5"
+      }`}>
       {/* Dynamic Background Glow (GPU Optimized) */}
       <div className="absolute inset-0 pointer-events-none opacity-30">
-        <div 
-          className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full transition-colors duration-1000" 
+        <div
+          className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full transition-colors duration-1000"
           style={{ background: `radial-gradient(circle, ${current.accent} 0%, transparent 60%)` }}
         />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
         {/* Left Interactive Selection List */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-40px" }}
@@ -116,9 +115,8 @@ export default function FlavorTeaser({ setCurrentPage, theme }) {
           className="lg:col-span-5 space-y-6"
         >
           <div className="space-y-2">
-            <span className={`text-xs font-bold uppercase tracking-widest ${
-              isLight ? "text-zinc-400" : "text-zinc-500"
-            }`}>
+            <span className={`text-xs font-bold uppercase tracking-widest ${isLight ? "text-zinc-400" : "text-zinc-500"
+              }`}>
               Find Your Perfect Flavor
             </span>
             <h2 className={`text-3xl sm:text-5xl font-extrabold ${isLight ? "text-zinc-950" : "text-white"}`}>
@@ -130,32 +128,29 @@ export default function FlavorTeaser({ setCurrentPage, theme }) {
           </div>
 
           {/* Device Tabs */}
-          <div className={`flex items-center gap-2 p-1.5 rounded-2xl border ${
-            isLight ? "bg-zinc-200/50 border-zinc-200" : "bg-white/5 border-white/10"
-          }`}>
+          <div className={`flex items-center gap-2 p-1.5 rounded-2xl border ${isLight ? "bg-zinc-200/50 border-zinc-200" : "bg-white/5 border-white/10"
+            }`}>
             <button
               onClick={() => { setDeviceFilter("juul2"); setActiveTab(0); }}
-              className={`flex-1 py-2.5 text-sm font-black uppercase tracking-widest rounded-xl transition-all ${
-                deviceFilter === "juul2"
+              className={`flex-1 py-2.5 text-sm font-black uppercase tracking-widest rounded-xl transition-all ${deviceFilter === "juul2"
                   ? isLight ? "bg-white text-zinc-950 shadow-sm" : "bg-white/10 text-white shadow-sm"
                   : isLight ? "text-zinc-500 hover:text-zinc-800" : "text-zinc-500 hover:text-zinc-300"
-              }`}
+                }`}
             >
               JUUL 2 Pods
             </button>
             <button
               onClick={() => { setDeviceFilter("juul1"); setActiveTab(0); }}
-              className={`flex-1 py-2.5 text-sm font-black uppercase tracking-widest rounded-xl transition-all ${
-                deviceFilter === "juul1"
+              className={`flex-1 py-2.5 text-sm font-black uppercase tracking-widest rounded-xl transition-all ${deviceFilter === "juul1"
                   ? isLight ? "bg-white text-zinc-950 shadow-sm" : "bg-white/10 text-white shadow-sm"
                   : isLight ? "text-zinc-500 hover:text-zinc-800" : "text-zinc-500 hover:text-zinc-300"
-              }`}
+                }`}
             >
               JUUL 1 Pods
             </button>
           </div>
 
-          <div 
+          <div
             className="flex flex-col gap-3 pt-4 max-h-[280px] overflow-y-auto scrollbar-hide pr-2"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
@@ -165,22 +160,20 @@ export default function FlavorTeaser({ setCurrentPage, theme }) {
               <button
                 key={flavor.id}
                 onClick={() => setActiveTab(index)}
-                className={`w-full text-left p-5 rounded-2xl border transition-all duration-300 flex items-center justify-between cursor-pointer ${
-                  activeTab === index 
+                className={`w-full text-left p-5 rounded-2xl border transition-all duration-300 flex items-center justify-between cursor-pointer ${activeTab === index
                     ? isLight
                       ? "bg-white border-zinc-200 shadow-[0_8px_30px_rgba(0,0,0,0.04)]"
-                      : "bg-white/5 border-white/10 shadow-lg" 
+                      : "bg-white/5 border-white/10 shadow-lg"
                     : "bg-transparent border-transparent opacity-55 hover:opacity-90"
-                }`}
+                  }`}
               >
                 <div>
-                  <p className={`text-xs uppercase tracking-widest font-bold mb-1 ${
-                    isLight ? "text-zinc-400" : "text-zinc-500"
-                  }`}>0{index + 1}</p>
+                  <p className={`text-xs uppercase tracking-widest font-bold mb-1 ${isLight ? "text-zinc-400" : "text-zinc-500"
+                    }`}>0{index + 1}</p>
                   <p className={`text-lg font-black ${isLight ? "text-zinc-800" : "text-white"}`}>{flavor.title}</p>
                 </div>
-                <div 
-                  className="w-4 h-4 rounded-full" 
+                <div
+                  className="w-4 h-4 rounded-full"
                   style={{ backgroundColor: flavor.accent }}
                 />
               </button>
@@ -197,9 +190,8 @@ export default function FlavorTeaser({ setCurrentPage, theme }) {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
               transition={{ duration: 0.55, ease: "easeInOut" }}
-              className={`w-full h-full p-8 sm:p-12 rounded-3xl bg-gradient-to-br ${current.color} flex flex-col justify-between shadow-2xl relative overflow-hidden border ${
-                isLight ? "border-zinc-200/10" : "border-white/10"
-              }`}
+              className={`w-full h-full p-8 sm:p-12 rounded-3xl bg-gradient-to-br ${current.color} flex flex-col justify-between shadow-2xl relative overflow-hidden border ${isLight ? "border-zinc-200/10" : "border-white/10"
+                }`}
             >
               {/* Abs grid inside card */}
               <div className="absolute inset-0 bg-black/10 pointer-events-none" />
@@ -231,7 +223,7 @@ export default function FlavorTeaser({ setCurrentPage, theme }) {
                   </div>
                 </div>
                 <button
-                  onClick={() => setCurrentPage("product")}
+                  onClick={() => setCurrentPage(deviceFilter)}
                   className="bg-white text-black hover:bg-black hover:text-white transition-all duration-300 text-xs uppercase tracking-widest font-bold px-6 py-4 rounded-full flex items-center justify-center gap-2 cursor-pointer shadow-md w-full sm:w-auto"
                 >
                   Shop Now <ChevronRight className="w-4 h-4" />

@@ -3,117 +3,18 @@
 import { motion } from "framer-motion";
 import { Star, ShoppingCart } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { allProducts } from "@/data/products";
 
 export default function ProductRecommendations({ category, currentProductId, onProductClick, onAddToCart, theme }) {
   const isLight = theme === "light";
 
-  // Full product catalog for reference
-  const catalog = [
-    {
-      id: "juul1-slate",
-      name: "JUUL 1 Device Kit - Slate Grey",
-      category: "kits",
-      version: "juul1",
-      price: 24.99,
-      rating: 4.8,
-      reviewsCount: 142,
-      imgColor: "#4B5563",
-      tag: "Original Classic",
-      desc: "Anodized metal body with signature rapid USB magnetic charging."
-    },
-    {
-      id: "juul1-mint",
-      name: "JUUL 1 Pod Pack - Cool Mint",
-      category: "pods",
-      version: "juul1",
-      price: 15.99,
-      rating: 4.9,
-      reviewsCount: 310,
-      imgColor: "#10B981",
-      tag: "Signature Blend",
-      desc: "Pack of 4 pre-filled pods containing crisp peppermint frost.",
-      image: "/deal-mint.png"
-    },
-    {
-      id: "juul2-device",
-      name: "JUUL 2 Device Kit - Slate Grey",
-      category: "kits",
-      version: "juul2",
-      price: 29.99,
-      rating: 5.0,
-      reviewsCount: 194,
-      imgColor: "#1E1E20",
-      tag: "Smart Gen 2",
-      desc: "Enhanced vapor draw, massive battery, and dynamic smart LED indicators.",
-      image: "/deal-bundle.png"
-    },
-    {
-      id: "juul2-apple",
-      name: "JUUL 2 Pods - Ruby Sunset (Crisp Apple)",
-      category: "pods",
-      version: "juul2",
-      price: 17.99,
-      rating: 4.9,
-      reviewsCount: 228,
-      imgColor: "#EF4444",
-      tag: "Many Flavors",
-      desc: "Pack of 2 genuine pods with crisp red apple aroma and juicy finish.",
-      image: "/deal-triple.png"
-    },
-    {
-      id: "juul2-mango",
-      name: "JUUL 2 Pods - Summer Gold (Tropical Mango)",
-      category: "pods",
-      version: "juul2",
-      price: 17.99,
-      rating: 4.8,
-      reviewsCount: 312,
-      imgColor: "#F59E0B",
-      tag: "Many Flavors",
-      desc: "Pack of 2 genuine pods featuring rich tropical sun-ripened mango.",
-      image: "/deal-triple.png"
-    },
-    {
-      id: "carry-case",
-      name: "Tactical Leather Carrying Case",
-      category: "accessories",
-      version: "juul2",
-      price: 19.99,
-      rating: 4.9,
-      reviewsCount: 52,
-      imgColor: "#78350F",
-      tag: "Bespoke Carry",
-      desc: "Handcrafted, shockproof carrying case for device and pods.",
-      image: "/deal-case.png"
-    },
-    {
-      id: "usb-dock",
-      name: "Magnetic USB Charging Dock",
-      category: "accessories",
-      version: "juul1",
-      price: 9.99,
-      rating: 4.6,
-      reviewsCount: 64,
-      imgColor: "#374151",
-      tag: "Original Accessories",
-      desc: "Compact wireless USB dock to charge your JUUL 1 anywhere.",
-      image: "/juul1-charger.png"
-    }
-  ];
-
-  // Filter out the current product and get items in similar categories or just generally popular items
-  const recommendations = catalog
-    .filter(p => p.id !== currentProductId)
-    .filter(p => p.category === category || category === "all")
-    .slice(0, 4);
-
-  // If there are not enough items in the same category, fill up with general popular items
-  if (recommendations.length < 4) {
-    const extraItems = catalog
-      .filter(p => p.id !== currentProductId && !recommendations.some(r => r.id === p.id))
-      .slice(0, 4 - recommendations.length);
-    recommendations.push(...extraItems);
-  }
+  // Filter out current product, prefer same category, fill with others
+  const recommendations = (() => {
+    const sameCat = allProducts.filter(p => p.id !== currentProductId && p.category === category);
+    const others = allProducts.filter(p => p.id !== currentProductId && p.category !== category);
+    return [...sameCat, ...others].slice(0, 4);
+  })();
 
   return (
     <div className={`pt-16 border-t text-left ${isLight ? "border-zinc-200" : "border-white/5"}`}>
@@ -129,18 +30,16 @@ export default function ProductRecommendations({ category, currentProductId, onP
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-20px" }}
             transition={{ duration: 0.4 }}
-            className={`group relative flex flex-col justify-between rounded-3xl p-4 border transition-all duration-300 ${
-              isLight
+            className={`group relative flex flex-col justify-between rounded-3xl p-4 border transition-all duration-300 ${isLight
                 ? "bg-white border-zinc-200 hover:border-zinc-300 shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.04)]"
                 : "bg-[#111112] border-white/5 hover:border-white/10"
-            }`}
+              }`}
           >
             {/* Image Box */}
-            <div 
-              onClick={() => onProductClick(prod)}
-              className={`w-full h-40 rounded-2xl border relative overflow-hidden flex items-center justify-center cursor-pointer transition-colors ${
-                isLight ? "bg-zinc-50 border-zinc-100" : "bg-zinc-950 border-white/5"
-              }`}
+            <Link
+              href={`/product/${prod.id}`}
+              className={`w-full h-40 rounded-2xl border relative overflow-hidden flex items-center justify-center cursor-pointer transition-colors block ${isLight ? "bg-zinc-50 border-zinc-100" : "bg-zinc-950 border-white/5"
+                }`}
             >
               {prod.image ? (
                 <Image
@@ -161,7 +60,7 @@ export default function ProductRecommendations({ category, currentProductId, onP
                   <div className="w-full h-1 bg-zinc-700 rounded-full" />
                 </div>
               )}
-            </div>
+            </Link>
 
             {/* Content info */}
             <div className="mt-4 space-y-2">
@@ -175,14 +74,13 @@ export default function ProductRecommendations({ category, currentProductId, onP
                 </span>
               </div>
 
-              <h4 
-                onClick={() => onProductClick(prod)}
-                className={`text-xs font-bold transition-colors cursor-pointer line-clamp-1 hover:underline ${
-                  isLight ? "text-zinc-900" : "text-white"
-                }`}
+              <Link
+                href={`/product/${prod.id}`}
+                className={`text-xs font-bold transition-colors cursor-pointer line-clamp-1 hover:underline block ${isLight ? "text-zinc-900" : "text-white"
+                  }`}
               >
                 {prod.name}
-              </h4>
+              </Link>
             </div>
 
             {/* Footer action */}
@@ -190,11 +88,10 @@ export default function ProductRecommendations({ category, currentProductId, onP
               <span className={`text-sm font-black ${isLight ? "text-zinc-950" : "text-white"}`}>AED {prod.price}</span>
               <button
                 onClick={() => onAddToCart(prod)}
-                className={`p-2 rounded-full transition-all duration-300 cursor-pointer ${
-                  isLight 
-                    ? "bg-zinc-950 hover:bg-zinc-800 text-white" 
+                className={`p-2 rounded-full transition-all duration-300 cursor-pointer ${isLight
+                    ? "bg-zinc-950 hover:bg-zinc-800 text-white"
                     : "bg-white/5 hover:bg-emerald-450 hover:text-black text-white"
-                }`}
+                  }`}
               >
                 <ShoppingCart className="w-3.5 h-3.5" />
               </button>

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ShopByCategory({ setCurrentPage, setCategoryFilter, setVersionFilter, theme }) {
   const isLight = theme === "light";
@@ -72,15 +73,10 @@ export default function ShopByCategory({ setCurrentPage, setCategoryFilter, setV
         {/* Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {categories.map((cat, i) => (
-            <motion.div
+          <Link
               key={cat.id}
-              onClick={() => handleCategoryClick(cat.id)}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ delay: i * 0.1, duration: 0.5, ease: "easeOut" }}
-              whileHover={{ y: -6 }}
-              className={`group rounded-3xl border cursor-pointer transition-all duration-300 overflow-hidden flex flex-col ${cat.cardBg}`}
+              href={cat.id === "juul1" ? "/juul1" : "/juul2"}
+              className={`group rounded-3xl border cursor-pointer transition-all duration-300 overflow-hidden flex flex-col ${cat.cardBg} hover:-translate-y-1.5 block`}
             >
               {/* Product Image Area */}
               <div className={`relative w-full h-52 overflow-hidden flex items-center justify-center ${
@@ -155,7 +151,7 @@ export default function ShopByCategory({ setCurrentPage, setCategoryFilter, setV
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </Link>
           ))}
         </div>
       </div>

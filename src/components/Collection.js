@@ -24,8 +24,7 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
   const categories = [
     { id: "all", label: "All Products" },
     { id: "kits", label: "Starter Kits" },
-    { id: "pods", label: "Vape Pods" },
-    { id: "accessories", label: "Accessories" }
+    { id: "pods", label: "JUUL Pods" }
   ];
 
   const products = [
@@ -194,121 +193,113 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
 
   const filteredProducts = products.filter(p => {
     const matchesCategory = activeCategory === "all" || p.category === activeCategory;
-    const matchesVersion = versionFilter === "all" || p.version === versionFilter;
-    return matchesCategory && matchesVersion;
+    return matchesCategory;
   });
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
-    setCurrentPage("product");
   };
 
   return (
-    <motion.section 
+    <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className={`pt-32 pb-20 min-h-screen text-left transition-colors duration-500 ${
-        isLight ? "bg-zinc-50 text-zinc-900" : "bg-[#09090A] text-white"
-      }`}
+      className={`pt-32 pb-20 min-h-screen text-left transition-colors duration-500 ${isLight ? "bg-zinc-50 text-zinc-900" : "bg-[#09090A] text-white"
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="mb-8 flex flex-col md:flex-row justify-between items-end relative z-10">
           <div className="text-center md:text-left">
-            <span className={`text-xs font-bold uppercase tracking-widest ${
-              isLight ? "text-blue-600" : "text-emerald-400"
-            }`}>
+            <span className={`text-xs font-bold uppercase tracking-widest ${isLight ? "text-blue-600" : "text-emerald-400"
+              }`}>
               Curated Catalog
             </span>
-            <h1 className={`text-3xl sm:text-5xl font-extrabold tracking-tight mt-2 ${
-              isLight ? "text-zinc-950" : "text-white"
-            }`}>
+            <h1 className={`text-3xl sm:text-5xl font-extrabold tracking-tight mt-2 ${isLight ? "text-zinc-950" : "text-white"
+              }`}>
               Premium Collections
             </h1>
           </div>
 
           {/* Decorative Floating JUUL 2 Device */}
           <div className="hidden md:flex justify-end items-end w-48 mr-32 -mb-6">
-            <motion.div 
-              animate={{ y: [0, -10, 0] }} 
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               className="relative pointer-events-none"
             >
               <div className="rotate-[20deg] scale-90 relative origin-bottom">
-                 {/* 100% Authentic Sticker Badge */}
-                 <motion.div 
-                   initial={{ scale: 0, rotate: -60 }}
-                   animate={{ scale: 1, rotate: -15 }}
-                   transition={{ type: "spring", stiffness: 200, delay: 0.5 }}
-                   className="absolute -top-6 -right-12 z-30 w-16 h-16 bg-gradient-to-br from-yellow-300 to-amber-500 rounded-full flex flex-col items-center justify-center border-2 border-white/80 shadow-[0_10px_20px_rgba(245,158,11,0.5)] text-zinc-950 font-black leading-none"
-                 >
-                   <span className="text-lg tracking-tighter">100%</span>
-                   <span className="text-[6px] uppercase tracking-widest mt-0.5 opacity-90">Authentic</span>
-                 </motion.div>
+                {/* 100% Authentic Sticker Badge */}
+                <motion.div
+                  initial={{ scale: 0, rotate: -60 }}
+                  animate={{ scale: 1, rotate: -15 }}
+                  transition={{ type: "spring", stiffness: 200, delay: 0.5 }}
+                  className="absolute -top-6 -right-12 z-30 w-16 h-16 bg-gradient-to-br from-yellow-300 to-amber-500 rounded-full flex flex-col items-center justify-center border-2 border-white/80 shadow-[0_10px_20px_rgba(245,158,11,0.5)] text-zinc-950 font-black leading-none"
+                >
+                  <span className="text-lg tracking-tighter">100%</span>
+                  <span className="text-[6px] uppercase tracking-widest mt-0.5 opacity-90">Authentic</span>
+                </motion.div>
 
-                 {/* JUUL 2 Device CSS Model */}
-                 <div className="relative w-14 h-36 rounded-xl bg-gradient-to-b from-[#333] to-[#111] shadow-2xl border border-white/10 flex flex-col items-center">
-                   {/* Pod */}
-                   <div className="absolute -top-6 w-12 h-8 bg-zinc-900 rounded-t-lg border-x border-t border-zinc-700 flex justify-center overflow-hidden">
-                     <div className="w-full h-full bg-gradient-to-b from-red-500/20 to-transparent" />
-                   </div>
-                   
-                   {/* Body Details - LED Lights */}
-                   <div className="absolute bottom-10 w-full px-2 flex justify-center">
-                     <div className="w-3 h-12 rounded-full bg-black/60 flex flex-col justify-center items-center gap-1.5 py-1">
-                       <div className="w-1 h-1 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,1)]" />
-                       <div className="w-1 h-1 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,1)]" />
-                       <div className="w-1 h-1 rounded-full bg-white/20" />
-                       <div className="w-1 h-1 rounded-full bg-white/20" />
-                     </div>
-                   </div>
+                {/* JUUL 2 Device CSS Model */}
+                <div className="relative w-14 h-36 rounded-xl bg-gradient-to-b from-[#333] to-[#111] shadow-2xl border border-white/10 flex flex-col items-center">
+                  {/* Pod */}
+                  <div className="absolute -top-6 w-12 h-8 bg-zinc-900 rounded-t-lg border-x border-t border-zinc-700 flex justify-center overflow-hidden">
+                    <div className="w-full h-full bg-gradient-to-b from-red-500/20 to-transparent" />
+                  </div>
 
-                   {/* Logo */}
-                   <div className="absolute bottom-3 font-black text-[6px] text-zinc-500 tracking-widest uppercase">JUUL</div>
-                 </div>
-                 
-                 {/* Background Glow */}
-                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-emerald-500/20 blur-2xl -z-10 rounded-full" />
+                  {/* Body Details - LED Lights */}
+                  <div className="absolute bottom-10 w-full px-2 flex justify-center">
+                    <div className="w-3 h-12 rounded-full bg-black/60 flex flex-col justify-center items-center gap-1.5 py-1">
+                      <div className="w-1 h-1 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,1)]" />
+                      <div className="w-1 h-1 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,1)]" />
+                      <div className="w-1 h-1 rounded-full bg-white/20" />
+                      <div className="w-1 h-1 rounded-full bg-white/20" />
+                    </div>
+                  </div>
+
+                  {/* Logo */}
+                  <div className="absolute bottom-3 font-black text-[6px] text-zinc-500 tracking-widest uppercase">JUUL</div>
+                </div>
+
+                {/* Background Glow */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-emerald-500/20 blur-2xl -z-10 rounded-full" />
               </div>
             </motion.div>
           </div>
         </div>
 
         {/* Single Simplified Filter Row */}
-        <div className={`flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-8 border-b ${
-          isLight ? "border-zinc-200" : "border-white/10"
-        }`}>
+        <div className={`flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-8 border-b ${isLight ? "border-zinc-200" : "border-white/10"
+          }`}>
           {/* Categories Tab selector */}
           <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {categories.map(cat => (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`whitespace-nowrap text-xs uppercase tracking-widest font-bold px-6 py-3 rounded-full border transition-all duration-300 cursor-pointer ${
-                  activeCategory === cat.id
+                className={`whitespace-nowrap text-xs uppercase tracking-widest font-bold px-6 py-3 rounded-full border transition-all duration-300 cursor-pointer ${activeCategory === cat.id
                     ? isLight
                       ? "bg-zinc-950 text-white border-zinc-950 shadow-md"
                       : "bg-white text-black border-white shadow-lg shadow-white/10"
                     : isLight
-                    ? "bg-white text-zinc-600 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-900 shadow-sm"
-                    : "bg-zinc-900/50 text-zinc-400 border-white/5 hover:border-white/20 hover:bg-white/5 hover:text-white"
-                }`}
+                      ? "bg-white text-zinc-600 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-900 shadow-sm"
+                      : "bg-zinc-900/50 text-zinc-400 border-white/5 hover:border-white/20 hover:bg-white/5 hover:text-white"
+                  }`}
               >
                 {cat.label}
               </button>
             ))}
           </div>
 
-          <p className={`whitespace-nowrap text-xs font-bold uppercase tracking-widest px-2 ${
-            isLight ? "text-zinc-400" : "text-zinc-500"
-          }`}>
+          <p className={`whitespace-nowrap text-xs font-bold uppercase tracking-widest px-2 ${isLight ? "text-zinc-400" : "text-zinc-500"
+            }`}>
             {filteredProducts.length} items
           </p>
         </div>
 
         {/* Product Grid */}
-        <motion.div 
+        <motion.div
           layout
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
@@ -321,34 +312,30 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4 }}
-                className={`group relative flex flex-col justify-between rounded-3xl p-5 border transition-all duration-300 ${
-                  isLight
+                className={`group relative flex flex-col justify-between rounded-3xl p-5 border transition-all duration-300 ${isLight
                     ? "bg-white border-zinc-200/80 shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:border-zinc-300/80 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)]"
                     : "bg-white/[0.01] border-white/5 hover:border-white/10 p-5 hover:bg-white/[0.02]"
-                }`}
+                  }`}
               >
                 {/* Image Showcase Box */}
-                <div 
+                <div
                   onClick={() => handleProductClick(prod)}
-                  className={`w-full h-56 rounded-2xl border relative overflow-hidden flex items-center justify-center cursor-pointer transition-colors ${
-                    isLight ? "bg-zinc-50 border-zinc-100" : "bg-zinc-950 border-white/5"
-                  }`}
+                  className={`w-full h-56 rounded-2xl border relative overflow-hidden flex items-center justify-center cursor-pointer transition-colors ${isLight ? "bg-zinc-50 border-zinc-100" : "bg-zinc-950 border-white/5"
+                    }`}
                 >
                   {/* Floating Tag */}
                   {prod.tag && (
-                    <span className={`absolute top-3 left-3 border backdrop-blur-md text-[9px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full ${
-                      isLight 
-                        ? "bg-zinc-900/10 border-zinc-900/5 text-zinc-800" 
+                    <span className={`absolute top-3 left-3 border backdrop-blur-md text-[9px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full ${isLight
+                        ? "bg-zinc-900/10 border-zinc-900/5 text-zinc-800"
                         : "bg-white/10 border-white/20 text-white"
-                    }`}>
+                      }`}>
                       {prod.tag}
                     </span>
                   )}
-                  <button className={`absolute top-3 right-3 p-1.5 rounded-full border transition-all ${
-                    isLight 
-                      ? "bg-white hover:bg-zinc-100 border-zinc-200 text-zinc-400 hover:text-zinc-700" 
+                  <button className={`absolute top-3 right-3 p-1.5 rounded-full border transition-all ${isLight
+                      ? "bg-white hover:bg-zinc-100 border-zinc-200 text-zinc-400 hover:text-zinc-700"
                       : "bg-white/5 hover:bg-white/10 border-white/5 text-zinc-400 hover:text-white"
-                  }`}>
+                    }`}>
                     <Heart className="w-3.5 h-3.5" />
                   </button>
 
@@ -356,15 +343,14 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
                   <motion.div
                     whileHover={{ scale: 1.08, rotate: -5 }}
                     transition={{ duration: 0.3 }}
-                    className={`w-10 h-36 rounded-md border flex flex-col items-center justify-between p-1 transition-all duration-500 shadow-xl ${
-                      isLight ? "border-zinc-200/50" : "border-white/10"
-                    }`}
-                    style={{ 
+                    className={`w-10 h-36 rounded-md border flex flex-col items-center justify-between p-1 transition-all duration-500 shadow-xl ${isLight ? "border-zinc-200/50" : "border-white/10"
+                      }`}
+                    style={{
                       backgroundColor: "#18181A",
                       boxShadow: isLight ? `0 10px 30px ${prod.imgColor}15` : `0 0 30px ${prod.imgColor}20`
                     }}
                   >
-                    <div 
+                    <div
                       className="w-full h-10 rounded-sm border-b border-black/40 flex flex-col justify-end p-0.5"
                       style={{ backgroundColor: `${prod.imgColor}20`, borderColor: `${prod.imgColor}40` }}
                     >
@@ -373,11 +359,11 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
                     {prod.version === "juul2" ? (
                       <div className="flex flex-col gap-0.5 justify-center items-center">
                         {[...Array(4)].map((_, i) => (
-                          <div 
+                          <div
                             key={i}
                             className="w-1.5 h-1.5 rounded-full shadow-lg"
-                            style={{ 
-                              backgroundColor: prod.imgColor, 
+                            style={{
+                              backgroundColor: prod.imgColor,
                               boxShadow: `0 0 5px ${prod.imgColor}`,
                               opacity: i === 0 ? 1 : 0.4
                             }}
@@ -385,10 +371,10 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
                         ))}
                       </div>
                     ) : (
-                      <div 
+                      <div
                         className="w-2.5 h-2.5 rounded-full shadow-lg"
-                        style={{ 
-                          backgroundColor: prod.imgColor, 
+                        style={{
+                          backgroundColor: prod.imgColor,
                           boxShadow: `0 0 10px ${prod.imgColor}`
                         }}
                       />
@@ -398,19 +384,17 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
 
                   {/* Quick-view overlay */}
                   <div className="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                    <button 
+                    <button
                       onClick={() => handleProductClick(prod)}
-                      className={`p-3 rounded-full bg-white text-black transition-colors shadow-lg cursor-pointer ${
-                        isLight ? "hover:bg-blue-600 hover:text-white" : "hover:bg-emerald-400"
-                      }`}
+                      className={`p-3 rounded-full bg-white text-black transition-colors shadow-lg cursor-pointer ${isLight ? "hover:bg-blue-600 hover:text-white" : "hover:bg-emerald-400"
+                        }`}
                     >
                       <Eye className="w-4 h-4" />
                     </button>
-                    <button 
+                    <button
                       onClick={() => onAddToCart(prod)}
-                      className={`p-3 rounded-full bg-white text-black transition-colors shadow-lg cursor-pointer ${
-                        isLight ? "hover:bg-blue-600 hover:text-white" : "hover:bg-emerald-400"
-                      }`}
+                      className={`p-3 rounded-full bg-white text-black transition-colors shadow-lg cursor-pointer ${isLight ? "hover:bg-blue-600 hover:text-white" : "hover:bg-emerald-400"
+                        }`}
                     >
                       <ShoppingCart className="w-4 h-4" />
                     </button>
@@ -430,35 +414,31 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
                     </span>
                   </div>
 
-                  <h3 
+                  <h3
                     onClick={() => handleProductClick(prod)}
-                    className={`text-base font-bold transition-colors cursor-pointer line-clamp-1 ${
-                      isLight 
-                        ? "text-zinc-900 hover:text-blue-600" 
+                    className={`text-base font-bold transition-colors cursor-pointer line-clamp-1 ${isLight
+                        ? "text-zinc-900 hover:text-blue-600"
                         : "text-white hover:text-emerald-400"
-                    }`}
+                      }`}
                   >
                     {prod.name}
                   </h3>
-                  <p className={`text-[11px] sm:text-xs font-light leading-relaxed line-clamp-2 ${
-                    isLight ? "text-zinc-500" : "text-zinc-400"
-                  }`}>
+                  <p className={`text-[11px] sm:text-xs font-light leading-relaxed line-clamp-2 ${isLight ? "text-zinc-500" : "text-zinc-400"
+                    }`}>
                     {prod.desc}
                   </p>
                 </div>
 
                 {/* Footer Purchase Actions */}
-                <div className={`flex items-center justify-between pt-4 mt-4 border-t ${
-                  isLight ? "border-zinc-100" : "border-white/5"
-                }`}>
+                <div className={`flex items-center justify-between pt-4 mt-4 border-t ${isLight ? "border-zinc-100" : "border-white/5"
+                  }`}>
                   <span className={`text-lg font-black ${isLight ? "text-zinc-950" : "text-white"}`}>${prod.price}</span>
                   <button
                     onClick={() => onAddToCart(prod)}
-                    className={`flex items-center gap-1.5 font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-full transition-all duration-300 cursor-pointer ${
-                      isLight 
-                        ? "bg-zinc-950 hover:bg-zinc-800 text-white shadow-md shadow-zinc-950/10" 
+                    className={`flex items-center gap-1.5 font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-full transition-all duration-300 cursor-pointer ${isLight
+                        ? "bg-zinc-950 hover:bg-zinc-800 text-white shadow-md shadow-zinc-950/10"
                         : "bg-white/5 hover:bg-emerald-400 text-white hover:text-black border border-white/10 hover:border-transparent"
-                    }`}
+                      }`}
                   >
                     <ShoppingCart className="w-3.5 h-3.5" /> Buy
                   </button>
@@ -471,11 +451,11 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
         {/* ==================================================================================== */}
         {/* ============================ 7 ADDED SEO / INFO SECTIONS ============================ */}
         {/* ==================================================================================== */}
-        
+
         <div className="mt-16 space-y-16">
-          
+
           {/* SECTION 1: Collection Guide */}
-          <motion.section 
+          <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -501,7 +481,7 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
           </motion.section>
 
           {/* SECTION 2: What We Offer */}
-          <motion.section 
+          <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -540,7 +520,7 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
           </motion.section>
 
           {/* SECTION 3: Choosing the Right Flavor (Premium Flavor Cards) */}
-          <motion.section 
+          <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -551,21 +531,21 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
                 <Droplet className="w-8 h-8 text-red-500" />
                 <h2 className="text-3xl md:text-5xl font-black text-center tracking-tight">3. Signature Flavors</h2>
               </div>
-              
+
               <div className="relative w-full overflow-hidden py-4 group/slider">
-                <button 
-                  onClick={scrollFlavorLeft} 
+                <button
+                  onClick={scrollFlavorLeft}
                   className="absolute left-2 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-xl border border-zinc-200 dark:border-white/10 opacity-0 group-hover/slider:opacity-100 transition-opacity cursor-pointer hidden sm:flex"
                 >
                   <ChevronLeft className="w-5 h-5 text-zinc-900 dark:text-white" />
                 </button>
-                <button 
-                  onClick={scrollFlavorRight} 
+                <button
+                  onClick={scrollFlavorRight}
                   className="absolute right-2 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-xl border border-zinc-200 dark:border-white/10 opacity-0 group-hover/slider:opacity-100 transition-opacity cursor-pointer hidden sm:flex"
                 >
                   <ChevronRight className="w-5 h-5 text-zinc-900 dark:text-white" />
                 </button>
-                
+
                 <div ref={flavorScrollRef} className="flex gap-6 w-full overflow-x-auto snap-x snap-mandatory pb-8 px-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   {[
                     {
@@ -617,11 +597,10 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
                       price: "$17.99"
                     }
                   ].map((flavor, i) => (
-                    <div key={i} className={`w-[calc(100vw-64px)] sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] snap-center flex-shrink-0 p-6 rounded-[2rem] border flex flex-col items-center text-center transition-all hover:-translate-y-2 ${
-                      isLight ? "bg-white border-zinc-200 shadow-xl shadow-zinc-200/50" : "bg-white/[0.02] border-white/10 shadow-xl shadow-black/50"
-                    }`}>
+                    <div key={i} className={`w-[calc(100vw-64px)] sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] snap-center flex-shrink-0 p-6 rounded-[2rem] border flex flex-col items-center text-center transition-all hover:-translate-y-2 ${isLight ? "bg-white border-zinc-200 shadow-xl shadow-zinc-200/50" : "bg-white/[0.02] border-white/10 shadow-xl shadow-black/50"
+                      }`}>
                       <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-8">2 Pods Per Pack</p>
-                      
+
                       {/* CSS Pod Mockup */}
                       <div className="w-16 h-36 relative mb-8">
                         {/* Mouthpiece */}
@@ -647,11 +626,11 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
 
                       <h3 className="text-xl font-black mb-1">{flavor.title}</h3>
                       <p className={`text-sm font-semibold mb-4 ${isLight ? "text-blue-600" : "text-blue-400"}`}>{flavor.subtitle}</p>
-                      
+
                       <p className={`text-[11px] leading-relaxed italic mb-6 flex-1 ${isLight ? "text-zinc-500" : "text-zinc-400"}`}>
                         "{flavor.desc}"
                       </p>
-                      
+
                       <div className="w-full pt-4 border-t border-zinc-200 dark:border-white/10">
                         <p className={`text-[10px] font-bold mb-2 uppercase ${isLight ? "text-zinc-400" : "text-zinc-500"}`}>Strength: 18 mg/ml</p>
                         <p className="text-2xl font-black">{flavor.price}</p>
@@ -664,7 +643,7 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
           </motion.section>
 
           {/* SECTION 4: Side-by-Side Comparison */}
-          <motion.section 
+          <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -704,7 +683,7 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
           </motion.section>
 
           {/* SECTION 5: Stay Protected */}
-          <motion.section 
+          <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -722,7 +701,7 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
           </motion.section>
 
           {/* SECTION 6: How to Identify Genuine Disposable Vapes in UAE */}
-          <motion.section 
+          <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -753,7 +732,7 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
           </motion.section>
 
           {/* SECTION 7: The Smart App Experience */}
-          <motion.section 
+          <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -764,12 +743,12 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
               <div className="w-full lg:w-1/2 flex justify-center relative">
                 {/* Glow effect */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-emerald-500/20 rounded-full blur-[80px]" />
-                
+
                 {/* Phone Frame */}
                 <div className="w-[280px] h-[580px] bg-[#111113] rounded-[3rem] border-[8px] border-zinc-800 p-5 relative shadow-2xl z-10 flex flex-col">
                   {/* Notch */}
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-zinc-800 rounded-b-2xl" />
-                  
+
                   {/* Top Status Bar Fake */}
                   <div className="flex justify-between items-center text-[9px] text-zinc-400 mt-2 px-2 font-semibold">
                     <span>9:41</span>
@@ -784,7 +763,7 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
                     <span className="font-black text-2xl tracking-tighter">JUUL</span>
                     <span className="text-xs font-bold bg-white/10 px-3 py-1.5 rounded-full">Usage Stats</span>
                   </div>
-                  
+
                   <p className="text-[10px] text-zinc-500 mt-3 px-1">Hello, <span className="text-white font-bold">Sarah</span> | Battery: 68%</p>
 
                   {/* App Content */}
@@ -798,9 +777,9 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
                       <div className="flex items-end justify-between h-24 gap-1.5 px-1">
                         {[40, 60, 35, 85, 50, 70, 45].map((h, i) => (
                           <div key={i} className="w-full flex flex-col items-center gap-1">
-                            <span className="text-[8px] text-zinc-500">{Math.floor(h*1.2)}</span>
+                            <span className="text-[8px] text-zinc-500">{Math.floor(h * 1.2)}</span>
                             <div className="w-full bg-emerald-400 rounded-sm transition-all" style={{ height: `${h}%`, opacity: i === 3 ? 1 : 0.3 }} />
-                            <span className="text-[8px] text-zinc-600 font-bold">{['M','T','W','T','F','S','S'][i]}</span>
+                            <span className="text-[8px] text-zinc-600 font-bold">{['M', 'T', 'W', 'T', 'F', 'S', 'S'][i]}</span>
                           </div>
                         ))}
                       </div>
@@ -808,20 +787,20 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
 
                     {/* Line graph - Weekly Trend */}
                     <div className="bg-white/5 border border-white/5 p-4 rounded-2xl">
-                       <p className="text-[10px] text-zinc-300 font-bold mb-2">Weekly Usage Graph</p>
-                       <div className="h-16 flex items-end relative mt-2">
-                         <svg viewBox="0 0 100 30" className="w-full h-full stroke-emerald-400 fill-none overflow-visible" preserveAspectRatio="none">
-                           <path d="M0,20 L16,10 L33,25 L50,5 L66,15 L83,10 L100,18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                           {/* Dots */}
-                           <circle cx="0" cy="20" r="2" className="fill-emerald-400" />
-                           <circle cx="16" cy="10" r="2" className="fill-emerald-400" />
-                           <circle cx="33" cy="25" r="2" className="fill-emerald-400" />
-                           <circle cx="50" cy="5" r="2" className="fill-white stroke-emerald-400 stroke-[1.5]" />
-                           <circle cx="66" cy="15" r="2" className="fill-emerald-400" />
-                           <circle cx="83" cy="10" r="2" className="fill-emerald-400" />
-                           <circle cx="100" cy="18" r="2" className="fill-emerald-400" />
-                         </svg>
-                       </div>
+                      <p className="text-[10px] text-zinc-300 font-bold mb-2">Weekly Usage Graph</p>
+                      <div className="h-16 flex items-end relative mt-2">
+                        <svg viewBox="0 0 100 30" className="w-full h-full stroke-emerald-400 fill-none overflow-visible" preserveAspectRatio="none">
+                          <path d="M0,20 L16,10 L33,25 L50,5 L66,15 L83,10 L100,18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                          {/* Dots */}
+                          <circle cx="0" cy="20" r="2" className="fill-emerald-400" />
+                          <circle cx="16" cy="10" r="2" className="fill-emerald-400" />
+                          <circle cx="33" cy="25" r="2" className="fill-emerald-400" />
+                          <circle cx="50" cy="5" r="2" className="fill-white stroke-emerald-400 stroke-[1.5]" />
+                          <circle cx="66" cy="15" r="2" className="fill-emerald-400" />
+                          <circle cx="83" cy="10" r="2" className="fill-emerald-400" />
+                          <circle cx="100" cy="18" r="2" className="fill-emerald-400" />
+                        </svg>
+                      </div>
                     </div>
 
                     {/* Nicotine Tracker */}
@@ -888,7 +867,7 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
           </motion.section>
 
           {/* SECTION 8: Customer Reviews */}
-          <motion.section 
+          <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -904,14 +883,14 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
                   <span className="text-yellow-500">★</span> 4.9/5 Average Rating
                 </div>
               </div>
-              
+
               <div className="relative w-full flex overflow-hidden">
                 {/* Gradient Masks for smooth fading edges */}
                 <div className={`absolute left-0 top-0 bottom-0 w-16 md:w-32 z-10 pointer-events-none bg-gradient-to-r ${isLight ? "from-white to-transparent" : "from-[#09090A] to-transparent"}`} />
                 <div className={`absolute right-0 top-0 bottom-0 w-16 md:w-32 z-10 pointer-events-none bg-gradient-to-l ${isLight ? "from-white to-transparent" : "from-[#09090A] to-transparent"}`} />
 
-                <motion.div 
-                  animate={{ x: ["0%", "-50%"] }} 
+                <motion.div
+                  animate={{ x: ["0%", "-50%"] }}
                   transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
                   className="flex w-max gap-6 px-4"
                 >
@@ -955,7 +934,7 @@ export default function Collection({ onAddToCart, setCurrentPage, setSelectedPro
 
         </div>
       </div>
-      
+
       {/* ============================ FAQ SECTION ============================ */}
       <div className="mt-32">
         <FAQ theme={theme} />

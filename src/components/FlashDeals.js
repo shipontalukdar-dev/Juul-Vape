@@ -4,10 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { ShoppingBag, Timer, Zap, Tag, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const DEALS = [
   {
-    id: "deal-1",
+    id: "juul2-device",
     name: "JUUL 2 Starter Bundle",
     desc: "Device + 2 Pod Packs of your choice",
     originalPrice: 89.99,
@@ -19,7 +20,7 @@ const DEALS = [
     stock: null,
   },
   {
-    id: "deal-2",
+    id: "juul1-mint",
     name: "JUUL 1 Classic Triple Pack",
     desc: "Cool Mint + Virginia Tobacco + Menthol",
     originalPrice: 47.97,
@@ -31,7 +32,7 @@ const DEALS = [
     stock: null,
   },
   {
-    id: "deal-3",
+    id: "juul2-polar-mint",
     name: "JUUL 2 Polar Mint × 2 Packs",
     desc: "Double mint bundle at a special price",
     originalPrice: 31.98,
@@ -43,7 +44,7 @@ const DEALS = [
     stock: 5,
   },
   {
-    id: "deal-4",
+    id: "carry-case",
     name: "Tactical Leather Case",
     desc: "Premium leather carry case — fits JUUL 1 & 2",
     originalPrice: 29.99,
@@ -169,9 +170,9 @@ function DealCard({ deal, isLight, onAddToCart, index, onProductClick }) {
       )}
 
       {/* Product Image */}
-      <div 
-        onClick={handleProductClick}
-        className={`relative w-full h-48 overflow-hidden cursor-pointer ${
+      <Link
+        href={`/product/${deal.id}`}
+        className={`relative w-full h-48 overflow-hidden cursor-pointer block ${
           isLight ? "bg-zinc-50" : "bg-zinc-900/50"
         }`}
       >
@@ -188,7 +189,7 @@ function DealCard({ deal, isLight, onAddToCart, index, onProductClick }) {
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
         </motion.div>
-      </div>
+      </Link>
 
       {/* Content */}
       <div className="flex flex-col gap-3 p-5 flex-1 justify-between">
@@ -197,12 +198,12 @@ function DealCard({ deal, isLight, onAddToCart, index, onProductClick }) {
           <span className={`text-[9px] font-black uppercase tracking-widest`}>
             {deal.badge}
           </span>
-          <h3 
-            onClick={handleProductClick}
-            className={`text-sm font-black leading-snug cursor-pointer hover:underline ${isLight ? "text-zinc-950" : "text-white"}`}
+          <Link
+            href={`/product/${deal.id}`}
+            className={`text-sm font-black leading-snug cursor-pointer hover:underline block ${isLight ? "text-zinc-950" : "text-white"}`}
           >
             {deal.name}
-          </h3>
+          </Link>
           <p className={`text-[11px] font-light leading-relaxed ${isLight ? "text-zinc-500" : "text-zinc-400"}`}>
             {deal.desc}
           </p>

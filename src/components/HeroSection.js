@@ -50,9 +50,11 @@ export default function HeroSection({ setCurrentPage, setCategoryFilter, setVers
   const s = slides[cur];
 
   const go = (v) => {
-    setCategoryFilter?.("all");
-    setVersionFilter?.(v);
-    setCurrentPage("collection");
+    if (v === "juul1") {
+      setCurrentPage("juul1");
+    } else {
+      setCurrentPage("collection"); // maps to /juul2 via page.js navigate()
+    }
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -62,9 +64,8 @@ export default function HeroSection({ setCurrentPage, setCategoryFilter, setVers
   }, [cur]);
 
   return (
-    <section className={`relative min-h-[100svh] flex items-center overflow-hidden transition-colors duration-700 ${
-      isLight ? "bg-zinc-50 text-zinc-900" : "bg-[#050506] text-white"
-    }`}>      {/* ═══ CSS Keyframes for all custom animations ═══ */}
+    <section className={`relative min-h-[100svh] flex items-center overflow-hidden transition-colors duration-700 ${isLight ? "bg-zinc-50 text-zinc-900" : "bg-[#050506] text-white"
+      }`}>      {/* ═══ CSS Keyframes for all custom animations ═══ */}
       <style>{`
         @keyframes vaporRise {
           0%   { transform: translateY(0) translateX(0) scale(0.8); opacity: 0; }
@@ -125,9 +126,8 @@ export default function HeroSection({ setCurrentPage, setCategoryFilter, setVers
 
       {/* ═══ GHOST WATERMARK ═══ */}
       <div
-        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none font-black tracking-tighter hidden sm:block ${
-          isLight ? "text-zinc-200/30" : "text-white/[0.015]"
-        }`}
+        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none font-black tracking-tighter hidden sm:block ${isLight ? "text-zinc-200/30" : "text-white/[0.015]"
+          }`}
         style={{ fontSize: "clamp(160px, 22vw, 380px)", lineHeight: 1 }}
         aria-hidden="true"
       >
@@ -144,11 +144,10 @@ export default function HeroSection({ setCurrentPage, setCategoryFilter, setVers
       />
 
       {/* ═══ Tech grid ═══ */}
-      <div className={`absolute inset-0 pointer-events-none ${
-        isLight
+      <div className={`absolute inset-0 pointer-events-none ${isLight
           ? "bg-[linear-gradient(to_right,#00000004_1px,transparent_1px),linear-gradient(to_bottom,#00000004_1px,transparent_1px)]"
           : "bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)]"
-      } bg-[size:40px_40px] opacity-40`} />
+        } bg-[size:40px_40px] opacity-40`} />
 
       {/* ═══ MAIN CONTENT ═══ */}
       <div className="relative z-10 max-w-7xl mx-auto w-full px-5 sm:px-8 pt-28 sm:pt-32 pb-10 sm:pb-14">
@@ -181,9 +180,8 @@ export default function HeroSection({ setCurrentPage, setCategoryFilter, setVers
                 </div>
 
                 {/* Huge Title + Shimmer Subtitle */}
-                <h1 className={`text-[2.8rem] leading-[1.02] sm:text-[3.8rem] lg:text-[4.8rem] font-black tracking-tight ${
-                  isLight ? "text-zinc-950" : "text-white"
-                }`}>
+                <h1 className={`text-[2.8rem] leading-[1.02] sm:text-[3.8rem] lg:text-[4.8rem] font-black tracking-tight ${isLight ? "text-zinc-950" : "text-white"
+                  }`}>
                   {s.title}
                   <span className="block mt-1">
                     <span
@@ -196,9 +194,8 @@ export default function HeroSection({ setCurrentPage, setCategoryFilter, setVers
                 </h1>
 
                 {/* Description */}
-                <p className={`text-sm sm:text-[15px] leading-relaxed max-w-lg mx-auto lg:mx-0 ${
-                  isLight ? "text-zinc-500" : "text-zinc-400"
-                }`}>
+                <p className={`text-sm sm:text-[15px] leading-relaxed max-w-lg mx-auto lg:mx-0 ${isLight ? "text-zinc-500" : "text-zinc-400"
+                  }`}>
                   {s.desc}
                 </p>
 
@@ -206,9 +203,8 @@ export default function HeroSection({ setCurrentPage, setCategoryFilter, setVers
                 <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2">
                   <button
                     onClick={() => go(s.version)}
-                    className={`group inline-flex items-center justify-center gap-2.5 px-9 py-4 rounded-full text-[11px] font-black uppercase tracking-widest transition-all active:scale-95 cursor-pointer relative overflow-hidden ${
-                      isLight ? "bg-zinc-950 text-white" : "text-white"
-                    }`}
+                    className={`group inline-flex items-center justify-center gap-2.5 px-9 py-4 rounded-full text-[11px] font-black uppercase tracking-widest transition-all active:scale-95 cursor-pointer relative overflow-hidden ${isLight ? "bg-zinc-950 text-white" : "text-white"
+                      }`}
                     style={!isLight ? {
                       background: `linear-gradient(135deg, ${s.color}cc, ${s.color}66)`,
                       boxShadow: `0 8px 32px ${s.color}30`,
@@ -223,11 +219,10 @@ export default function HeroSection({ setCurrentPage, setCategoryFilter, setVers
                   </button>
                   <button
                     onClick={() => go("all")}
-                    className={`inline-flex items-center justify-center px-9 py-4 rounded-full text-[11px] font-black uppercase tracking-widest border transition-all active:scale-95 cursor-pointer ${
-                      isLight
+                    className={`inline-flex items-center justify-center px-9 py-4 rounded-full text-[11px] font-black uppercase tracking-widest border transition-all active:scale-95 cursor-pointer ${isLight
                         ? "border-zinc-200 text-zinc-700 hover:bg-zinc-100 hover:border-zinc-300"
                         : "border-white/10 text-zinc-300 hover:bg-white/5 hover:border-white/20"
-                    }`}
+                      }`}
                   >
                     Full Collection
                   </button>
@@ -237,7 +232,7 @@ export default function HeroSection({ setCurrentPage, setCategoryFilter, setVers
 
             {/* Slide Indicators & Manual Navigation */}
             <div className="flex items-center gap-3 sm:gap-4 justify-center lg:justify-start pt-8">
-              <button 
+              <button
                 onClick={() => setCur((prev) => (prev - 1 + slides.length) % slides.length)}
                 className={`p-1.5 sm:p-2 rounded-full transition-colors active:scale-95 ${isLight ? "hover:bg-zinc-100 text-zinc-400 hover:text-zinc-700" : "hover:bg-white/5 text-zinc-500 hover:text-zinc-300"}`}
                 aria-label="Previous slide"
@@ -253,9 +248,8 @@ export default function HeroSection({ setCurrentPage, setCategoryFilter, setVers
                     className="relative py-2 cursor-pointer focus:outline-none group"
                     aria-label={`Slide ${i + 1}`}
                   >
-                    <div className={`h-[3px] rounded-full transition-all duration-500 ${
-                      i === cur ? "w-10 sm:w-12" : `w-4 sm:w-5 ${isLight ? "bg-zinc-300 group-hover:bg-zinc-400" : "bg-white/10 group-hover:bg-white/20"}`
-                    }`}
+                    <div className={`h-[3px] rounded-full transition-all duration-500 ${i === cur ? "w-10 sm:w-12" : `w-4 sm:w-5 ${isLight ? "bg-zinc-300 group-hover:bg-zinc-400" : "bg-white/10 group-hover:bg-white/20"}`
+                      }`}
                       style={i === cur ? { backgroundColor: sl.color, boxShadow: `0 0 8px ${sl.color}60` } : undefined}
                     />
                   </button>
@@ -266,7 +260,7 @@ export default function HeroSection({ setCurrentPage, setCategoryFilter, setVers
                 0{cur + 1}<span className="mx-1 opacity-40">/</span>0{slides.length}
               </span>
 
-              <button 
+              <button
                 onClick={() => setCur((prev) => (prev + 1) % slides.length)}
                 className={`p-1.5 sm:p-2 rounded-full transition-colors active:scale-95 ${isLight ? "hover:bg-zinc-100 text-zinc-400 hover:text-zinc-700" : "hover:bg-white/5 text-zinc-500 hover:text-zinc-300"}`}
                 aria-label="Next slide"
@@ -290,7 +284,7 @@ export default function HeroSection({ setCurrentPage, setCategoryFilter, setVers
             {/* Elegant Floating Specs Grid surrounding the device */}
             <div className="absolute inset-0 flex items-center justify-center w-full h-full pointer-events-none z-20">
               <AnimatePresence mode="wait">
-                <motion.div 
+                <motion.div
                   key={cur}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -304,33 +298,30 @@ export default function HeroSection({ setCurrentPage, setCategoryFilter, setVers
                       initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40, filter: "blur(10px)", scale: 0.9 }}
                       animate={{ opacity: 1, x: 0, filter: "blur(0px)", scale: 1 }}
                       transition={{ delay: i * 0.15, duration: 0.6, ease: "easeOut" }}
-                        className={`flex flex-col items-center justify-center text-center px-4 py-3 sm:py-3.5 rounded-2xl backdrop-blur-xl border transition-transform duration-500 will-change-transform ${
-                          isLight 
-                            ? "bg-white/70 border-white shadow-[0_8px_30px_rgba(0,0,0,0.06)]" 
-                            : "bg-[#09090A]/70 border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.4)]"
+                      className={`flex flex-col items-center justify-center text-center px-4 py-3 sm:py-3.5 rounded-2xl backdrop-blur-xl border transition-transform duration-500 will-change-transform ${isLight
+                          ? "bg-white/70 border-white shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
+                          : "bg-[#09090A]/70 border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.4)]"
                         }`}
-                      >
-                         <span className={`text-[8px] sm:text-[9px] uppercase tracking-widest font-black flex items-center justify-center gap-1.5 mb-1 ${
-                           isLight ? "text-zinc-500" : "text-zinc-400"
-                         }`}>
-                           <motion.span 
-                             animate={{ opacity: [0.3, 1, 0.3] }}
-                             transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
-                             className="w-1.5 h-1.5 rounded-full shadow-sm" 
-                             style={{ backgroundColor: s.color, boxShadow: `0 0 6px ${s.color}` }}
-                           />
-                           {spec.label}
-                         </span>
-                         
-                         <span className={`text-[11px] sm:text-xs lg:text-sm tracking-wide font-extrabold whitespace-nowrap ${
-                           isLight ? "text-zinc-950" : "text-white"
-                         }`}>
-                           {spec.value}
-                         </span>
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                </AnimatePresence>
+                    >
+                      <span className={`text-[8px] sm:text-[9px] uppercase tracking-widest font-black flex items-center justify-center gap-1.5 mb-1 ${isLight ? "text-zinc-500" : "text-zinc-400"
+                        }`}>
+                        <motion.span
+                          animate={{ opacity: [0.3, 1, 0.3] }}
+                          transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
+                          className="w-1.5 h-1.5 rounded-full shadow-sm"
+                          style={{ backgroundColor: s.color, boxShadow: `0 0 6px ${s.color}` }}
+                        />
+                        {spec.label}
+                      </span>
+
+                      <span className={`text-[11px] sm:text-xs lg:text-sm tracking-wide font-extrabold whitespace-nowrap ${isLight ? "text-zinc-950" : "text-white"
+                        }`}>
+                        {spec.value}
+                      </span>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
             </div>
 
             {/* 360 Degree True CSS 3D Device Container */}
@@ -341,22 +332,22 @@ export default function HeroSection({ setCurrentPage, setCategoryFilter, setVers
               {/* Glow halo (Perfect Circle) */}
               <div
                 className="absolute left-1/2 top-1/2 w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] rounded-full transition-colors duration-700 pointer-events-none"
-                style={{ 
-                   background: `radial-gradient(circle, ${s.color} 0%, transparent 65%)`,
-                   opacity: isLight ? 0.2 : 0.35,
-                   transform: "translate(-50%, -50%) translateZ(-40px)",
-                   filter: "blur(10px)"
+                style={{
+                  background: `radial-gradient(circle, ${s.color} 0%, transparent 65%)`,
+                  opacity: isLight ? 0.2 : 0.35,
+                  transform: "translate(-50%, -50%) translateZ(-40px)",
+                  filter: "blur(10px)"
                 }}
               />
 
               {/* ----- BOTTOM SHADOW (FLOOR) ----- */}
-              <div className="absolute top-[102%] left-1/2 -translate-x-1/2 w-[54px] h-[24px] rounded-[50%]" 
-                   style={{ 
-                     background: isLight ? "rgba(0,0,0,0.15)" : "rgba(0,0,0,0.7)",
-                     boxShadow: isLight ? "0 0 15px 5px rgba(0,0,0,0.1)" : "0 0 20px 10px rgba(0,0,0,0.6)",
-                     transform: "translateY(40px) rotateX(90deg)", 
-                     filter: "blur(4px)" 
-                   }} 
+              <div className="absolute top-[102%] left-1/2 -translate-x-1/2 w-[54px] h-[24px] rounded-[50%]"
+                style={{
+                  background: isLight ? "rgba(0,0,0,0.15)" : "rgba(0,0,0,0.7)",
+                  boxShadow: isLight ? "0 0 15px 5px rgba(0,0,0,0.1)" : "0 0 20px 10px rgba(0,0,0,0.6)",
+                  transform: "translateY(40px) rotateX(90deg)",
+                  filter: "blur(4px)"
+                }}
               />
 
               <div
@@ -364,53 +355,53 @@ export default function HeroSection({ setCurrentPage, setCategoryFilter, setVers
                 style={{ transformStyle: "preserve-3d", animation: "spin3D 14s linear infinite" }}
               >
                 {/* ----- FRONT FACE ----- */}
-              <div className="absolute inset-0 flex flex-col items-center shadow-2xl" style={{ transform: "translateZ(8px)", backfaceVisibility: "hidden" }}>
-                <div className="w-full h-[15%] bg-[#1a1a1c] relative rounded-t-[2px] border-b-[1.5px] border-black/60 shadow-[inset_0_2px_4px_rgba(255,255,255,0.05)]">
-                  {/* Mouthpiece Curve */}
-                  <div className="absolute -top-1 w-[45%] left-1/2 -translate-x-1/2 h-1.5 bg-[#1a1a1c] rounded-t-[4px]" />
+                <div className="absolute inset-0 flex flex-col items-center shadow-2xl" style={{ transform: "translateZ(8px)", backfaceVisibility: "hidden" }}>
+                  <div className="w-full h-[15%] bg-[#1a1a1c] relative rounded-t-[2px] border-b-[1.5px] border-black/60 shadow-[inset_0_2px_4px_rgba(255,255,255,0.05)]">
+                    {/* Mouthpiece Curve */}
+                    <div className="absolute -top-1 w-[45%] left-1/2 -translate-x-1/2 h-1.5 bg-[#1a1a1c] rounded-t-[4px]" />
+                  </div>
+                  <div className="w-full flex-1 relative rounded-b-[2px] overflow-hidden shadow-[inset_0_0_12px_rgba(0,0,0,0.3)]"
+                    style={{ background: s.id === "juul1" ? "linear-gradient(160deg, #d4d4d8, #71717a)" : s.id === "juul2" ? "linear-gradient(160deg, #27272a, #09090b)" : "linear-gradient(160deg, #fcd34d, #b45309)" }}>
+                    {/* Diamond Window */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#1a1a1c] rotate-45 border-[1.5px] border-black/40 shadow-[inset_0_2px_4px_rgba(0,0,0,0.8)]" />
+                    {/* LED Indicator */}
+                    <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                      className="absolute top-[35%] left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full"
+                      style={{ backgroundColor: s.color, boxShadow: `0 0 12px ${s.color}, 0 0 20px ${s.color}` }}
+                    />
+                  </div>
                 </div>
-                <div className="w-full flex-1 relative rounded-b-[2px] overflow-hidden shadow-[inset_0_0_12px_rgba(0,0,0,0.3)]" 
-                     style={{ background: s.id === "juul1" ? "linear-gradient(160deg, #d4d4d8, #71717a)" : s.id === "juul2" ? "linear-gradient(160deg, #27272a, #09090b)" : "linear-gradient(160deg, #fcd34d, #b45309)" }}>
-                   {/* Diamond Window */}
-                   <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#1a1a1c] rotate-45 border-[1.5px] border-black/40 shadow-[inset_0_2px_4px_rgba(0,0,0,0.8)]" />
-                   {/* LED Indicator */}
-                   <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                     className="absolute top-[35%] left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full"
-                     style={{ backgroundColor: s.color, boxShadow: `0 0 12px ${s.color}, 0 0 20px ${s.color}` }}
-                   />
+
+                {/* ----- BACK FACE ----- */}
+                <div className="absolute inset-0 flex flex-col items-center" style={{ transform: "rotateY(180deg) translateZ(8px)", backfaceVisibility: "hidden" }}>
+                  <div className="w-full h-[15%] bg-[#111] relative rounded-t-[2px] border-b-[1.5px] border-black/60 shadow-[inset_0_2px_4px_rgba(255,255,255,0.02)]" />
+                  <div className="w-full flex-1 relative rounded-b-[2px] shadow-[inset_0_0_12px_rgba(0,0,0,0.3)]"
+                    style={{ background: s.id === "juul1" ? "linear-gradient(160deg, #a1a1aa, #d4d4d8)" : s.id === "juul2" ? "linear-gradient(160deg, #18181b, #27272a)" : "linear-gradient(160deg, #d97706, #fbbf24)" }}>
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#111] rotate-45 border-[1.5px] border-black/40 shadow-[inset_0_2px_4px_rgba(0,0,0,0.8)]" />
+                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[7px] tracking-widest opacity-40 rotate-90 font-black text-black select-none">JUUL</div>
+                  </div>
                 </div>
-              </div>
 
-              {/* ----- BACK FACE ----- */}
-              <div className="absolute inset-0 flex flex-col items-center" style={{ transform: "rotateY(180deg) translateZ(8px)", backfaceVisibility: "hidden" }}>
-                <div className="w-full h-[15%] bg-[#111] relative rounded-t-[2px] border-b-[1.5px] border-black/60 shadow-[inset_0_2px_4px_rgba(255,255,255,0.02)]" />
-                <div className="w-full flex-1 relative rounded-b-[2px] shadow-[inset_0_0_12px_rgba(0,0,0,0.3)]" 
-                     style={{ background: s.id === "juul1" ? "linear-gradient(160deg, #a1a1aa, #d4d4d8)" : s.id === "juul2" ? "linear-gradient(160deg, #18181b, #27272a)" : "linear-gradient(160deg, #d97706, #fbbf24)" }}>
-                   <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#111] rotate-45 border-[1.5px] border-black/40 shadow-[inset_0_2px_4px_rgba(0,0,0,0.8)]" />
-                   <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[7px] tracking-widest opacity-40 rotate-90 font-black text-black select-none">JUUL</div>
+                {/* ----- LEFT FACE (SIDE PROFILE) ----- */}
+                <div className="absolute h-full w-[16px] left-1/2 -translate-x-1/2 flex flex-col items-center shadow-2xl"
+                  style={{ transform: "rotateY(-90deg) translateZ(22px)", filter: "brightness(0.65)" }}>
+                  <div className="w-full h-[15%] bg-[#0a0a0a] relative rounded-t-[2px] border-r border-black/30 shadow-[inset_0_2px_4px_rgba(255,255,255,0.02)]">
+                    {/* Liquid window side slit */}
+                    <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-[2.5px] h-[10px] bg-amber-500/60 rounded-full shadow-[inset_0_2px_4px_rgba(0,0,0,0.8)]" />
+                  </div>
+                  <div className="w-full flex-1 rounded-b-[2px] shadow-[inset_0_0_8px_rgba(0,0,0,0.4)]"
+                    style={{ background: s.id === "juul1" ? "#71717a" : s.id === "juul2" ? "#09090b" : "#92400e" }} />
                 </div>
-              </div>
 
-              {/* ----- LEFT FACE (SIDE PROFILE) ----- */}
-              <div className="absolute h-full w-[16px] left-1/2 -translate-x-1/2 flex flex-col items-center shadow-2xl" 
-                   style={{ transform: "rotateY(-90deg) translateZ(22px)", filter: "brightness(0.65)" }}>
-                 <div className="w-full h-[15%] bg-[#0a0a0a] relative rounded-t-[2px] border-r border-black/30 shadow-[inset_0_2px_4px_rgba(255,255,255,0.02)]">
-                   {/* Liquid window side slit */}
-                   <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-[2.5px] h-[10px] bg-amber-500/60 rounded-full shadow-[inset_0_2px_4px_rgba(0,0,0,0.8)]" />
-                 </div>
-                 <div className="w-full flex-1 rounded-b-[2px] shadow-[inset_0_0_8px_rgba(0,0,0,0.4)]" 
-                      style={{ background: s.id === "juul1" ? "#71717a" : s.id === "juul2" ? "#09090b" : "#92400e" }} />
-              </div>
-
-              {/* ----- RIGHT FACE (SIDE PROFILE) ----- */}
-              <div className="absolute h-full w-[16px] left-1/2 -translate-x-1/2 flex flex-col items-center shadow-2xl" 
-                   style={{ transform: "rotateY(90deg) translateZ(22px)", filter: "brightness(0.4)" }}>
-                 <div className="w-full h-[15%] bg-[#0a0a0a] relative rounded-t-[2px] border-l border-black/30 shadow-[inset_0_2px_4px_rgba(255,255,255,0.02)]">
-                   <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-[2.5px] h-[10px] bg-amber-500/60 rounded-full shadow-[inset_0_2px_4px_rgba(0,0,0,0.8)]" />
-                 </div>
-                 <div className="w-full flex-1 rounded-b-[2px] shadow-[inset_0_0_8px_rgba(0,0,0,0.4)]" 
-                      style={{ background: s.id === "juul1" ? "#71717a" : s.id === "juul2" ? "#09090b" : "#92400e" }} />
-              </div>
+                {/* ----- RIGHT FACE (SIDE PROFILE) ----- */}
+                <div className="absolute h-full w-[16px] left-1/2 -translate-x-1/2 flex flex-col items-center shadow-2xl"
+                  style={{ transform: "rotateY(90deg) translateZ(22px)", filter: "brightness(0.4)" }}>
+                  <div className="w-full h-[15%] bg-[#0a0a0a] relative rounded-t-[2px] border-l border-black/30 shadow-[inset_0_2px_4px_rgba(255,255,255,0.02)]">
+                    <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-[2.5px] h-[10px] bg-amber-500/60 rounded-full shadow-[inset_0_2px_4px_rgba(0,0,0,0.8)]" />
+                  </div>
+                  <div className="w-full flex-1 rounded-b-[2px] shadow-[inset_0_0_8px_rgba(0,0,0,0.4)]"
+                    style={{ background: s.id === "juul1" ? "#71717a" : s.id === "juul2" ? "#09090b" : "#92400e" }} />
+                </div>
 
               </div>
             </div>

@@ -3,7 +3,9 @@
 import { motion } from "framer-motion";
 import { ShoppingCart, Star, Eye, ChevronLeft, ChevronRight, ShoppingBag } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { useApp } from "@/context/AppContext";
 
 export default function BestSellers({ onAddToCart, setCurrentPage, setSelectedProduct, theme }) {
   const isLight = theme === "light";
@@ -49,7 +51,7 @@ export default function BestSellers({ onAddToCart, setCurrentPage, setSelectedPr
 
   const bestProducts = [
     {
-      id: "slate-kit",
+      id: "juul2-device",
       name: "JUUL Device Kit - Slate",
       category: "kits",
       price: 29.99,
@@ -65,7 +67,7 @@ export default function BestSellers({ onAddToCart, setCurrentPage, setSelectedPr
       image: "/deal-bundle.png"
     },
     {
-      id: "mint-pods",
+      id: "juul2-polar-mint",
       name: "JUUL Pod Pack - Cool Mint",
       category: "pods",
       price: 15.99,
@@ -81,7 +83,7 @@ export default function BestSellers({ onAddToCart, setCurrentPage, setSelectedPr
       image: "/deal-mint.png"
     },
     {
-      id: "mango-pods",
+      id: "juul2-mango",
       name: "JUUL Pod Pack - Royal Mango",
       category: "pods",
       price: 15.99,
@@ -114,13 +116,13 @@ export default function BestSellers({ onAddToCart, setCurrentPage, setSelectedPr
     }
   ];
 
-  const repeatedProducts = [...bestProducts, ...bestProducts, ...bestProducts];
+  const { products: contextProducts } = useApp();
+  const activeBestProducts = contextProducts && contextProducts.length > 0
+    ? contextProducts.filter(p => p.tag === "Best Seller" || p.rating >= 4.8)
+    : bestProducts;
 
-  const handleProductClick = (prod) => {
-    setSelectedProduct(prod);
-    setCurrentPage("product");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const repeatedProducts = [...activeBestProducts, ...activeBestProducts, ...activeBestProducts];
+
 
   return (
     <section className={`py-24 border-y transition-colors duration-500 ${
@@ -141,11 +143,8 @@ export default function BestSellers({ onAddToCart, setCurrentPage, setSelectedPr
               Best Sellers UAE
             </h2>
           </div>
-          <button 
-            onClick={() => {
-              setCurrentPage("collection");
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
+          <Link
+            href="/juul2"
             className={`text-xs uppercase tracking-widest font-black py-3 px-6 rounded-full border transition-all duration-350 cursor-pointer ${
               isLight 
                 ? "border-zinc-300 hover:border-zinc-950 hover:bg-zinc-950 hover:text-white" 
@@ -153,7 +152,7 @@ export default function BestSellers({ onAddToCart, setCurrentPage, setSelectedPr
             }`}
           >
             View All Collection
-          </button>
+          </Link>
         </div>
 
         {/* Auto Scrolling Product Slider */}
@@ -215,9 +214,9 @@ export default function BestSellers({ onAddToCart, setCurrentPage, setSelectedPr
                   )}
 
                   {/* Product Image */}
-                  <div 
-                    onClick={() => handleProductClick(prod)}
-                    className={`relative w-full h-48 overflow-hidden cursor-pointer ${
+                  <Link
+                    href={`/product/${prod.id}`}
+                    className={`relative w-full h-48 overflow-hidden cursor-pointer block ${
                       isLight ? "bg-zinc-50" : "bg-zinc-900/50"
                     }`}
                   >
@@ -245,7 +244,7 @@ export default function BestSellers({ onAddToCart, setCurrentPage, setSelectedPr
                         </div>
                       )}
                     </motion.div>
-                  </div>
+                  </Link>
 
                   {/* Content */}
                   <div className="flex flex-col gap-3 p-5 flex-1 justify-between">
@@ -254,12 +253,12 @@ export default function BestSellers({ onAddToCart, setCurrentPage, setSelectedPr
                       <span className={`text-[9px] font-black uppercase tracking-widest`} style={{ color: prod.imgColor }}>
                         🔥 {prod.tag}
                       </span>
-                      <h3 
-                        onClick={() => handleProductClick(prod)}
-                        className={`text-sm sm:text-base font-black leading-snug cursor-pointer hover:underline ${isLight ? "text-zinc-950" : "text-white"}`}
+                      <Link
+                        href={`/product/${prod.id}`}
+                        className={`text-sm sm:text-base font-black leading-snug cursor-pointer hover:underline block ${isLight ? "text-zinc-950" : "text-white"}`}
                       >
                         {prod.name}
-                      </h3>
+                      </Link>
                       <p className={`text-[11px] font-light leading-relaxed line-clamp-2 ${isLight ? "text-zinc-500" : "text-zinc-400"}`}>
                         {prod.desc}
                       </p>
