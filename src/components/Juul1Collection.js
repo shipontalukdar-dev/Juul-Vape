@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingCart, Star, Filter, Heart, Eye, BookOpen, Award, Droplet, Layers, Shield, Search, Smartphone, Info, AlertCircle, ThumbsUp, CheckCircle, Zap, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 import FAQ from "./FAQ";
 
 export default function Juul1Collection({ onAddToCart, setCurrentPage, setSelectedProduct, theme, activeCategory = "all", setActiveCategory, versionFilter = "all", setVersionFilter }) {
@@ -634,6 +635,102 @@ export default function Juul1Collection({ onAddToCart, setCurrentPage, setSelect
                     ))}
                   </tbody>
                 </table>
+              </div>
+            </div>
+          </motion.section>
+
+          {/* SECTION: Old vs New Packaging Comparison */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className={`p-8 md:p-12 rounded-[2.5rem] border ${
+              isLight ? "bg-white border-zinc-200" : "bg-zinc-900/40 border-white/10"
+            }`}>
+              <div className="flex flex-col lg:flex-row gap-12 items-center">
+                {/* Text Content */}
+                <div className="w-full lg:w-1/2 space-y-6">
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 rounded-2xl bg-emerald-500/10 text-emerald-500">
+                      <Layers className="w-8 h-8" />
+                    </div>
+                    <h2 className="text-3xl font-black">JUUL 1 Packaging: Old vs New</h2>
+                  </div>
+                  <p className={`text-lg leading-relaxed ${isLight ? "text-zinc-600" : "text-zinc-400"}`}>
+                    To combat counterfeit products in the UAE market, JUUL has overhauled its product packaging. 
+                    The new packaging introduces advanced security features, bolder design language, and strict compliance labels. 
+                    Understand the differences to ensure you only purchase 100% authentic pods.
+                  </p>
+
+                  {/* Comparison Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
+                    {/* Old Packaging Card */}
+                    <div className={`p-5 rounded-2xl border ${
+                      isLight ? "bg-zinc-50 border-zinc-150" : "bg-zinc-800/20 border-white/5"
+                    }`}>
+                      <h4 className="text-lg font-bold text-red-500 mb-3 flex items-center gap-2">
+                        <AlertCircle className="w-5 h-5" /> Old Packaging
+                      </h4>
+                      <ul className="space-y-2 text-sm leading-relaxed">
+                        <li className="flex items-start gap-2 text-zinc-500 dark:text-zinc-400">
+                          <span className="text-red-500 shrink-0">•</span> Plain white matte cardboard boxes
+                        </li>
+                        <li className="flex items-start gap-2 text-zinc-500 dark:text-zinc-400">
+                          <span className="text-red-500 shrink-0">•</span> Basic branding without generation detail
+                        </li>
+                        <li className="flex items-start gap-2 text-zinc-500 dark:text-zinc-400">
+                          <span className="text-red-500 shrink-0">•</span> Lacked anti-counterfeit hologram QR codes
+                        </li>
+                        <li className="flex items-start gap-2 text-zinc-500 dark:text-zinc-400">
+                          <span className="text-red-500 shrink-0">•</span> Outdated health warning messages
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* New Packaging Card */}
+                    <div className={`p-5 rounded-2xl border ${
+                      isLight ? "bg-emerald-50/50 border-emerald-100/80" : "bg-emerald-500/5 border-emerald-500/10"
+                    }`}>
+                      <h4 className="text-lg font-bold text-emerald-500 mb-3 flex items-center gap-2">
+                        <CheckCircle className="w-5 h-5" /> New Packaging
+                      </h4>
+                      <ul className="space-y-2 text-sm leading-relaxed">
+                        <li className="flex items-start gap-2 text-zinc-700 dark:text-zinc-300 font-medium">
+                          <span className="text-emerald-500 shrink-0">•</span> Premium dark/black robust box design
+                        </li>
+                        <li className="flex items-start gap-2 text-zinc-700 dark:text-zinc-300 font-medium">
+                          <span className="text-emerald-500 shrink-0">•</span> Distinct generation badges ("JUUL 1")
+                        </li>
+                        <li className="flex items-start gap-2 text-zinc-700 dark:text-zinc-300 font-medium">
+                          <span className="text-emerald-500 shrink-0">•</span> Smart hologram QR verification seal
+                        </li>
+                        <li className="flex items-start gap-2 text-zinc-700 dark:text-zinc-300 font-medium">
+                          <span className="text-emerald-500 shrink-0">•</span> Compliance warnings printed on front & back
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Packaging Image representation */}
+                <div className="w-full lg:w-1/2 flex justify-center">
+                  <div className={`relative w-full max-w-md aspect-square rounded-3xl overflow-hidden border p-4 shadow-2xl transition-transform duration-300 hover:scale-[1.02] ${
+                    isLight ? "bg-zinc-50 border-zinc-200" : "bg-zinc-950 border-white/5"
+                  }`}>
+                    <div className="relative w-full h-full">
+                      <Image
+                        src="/juul_packaging_comparison.png"
+                        alt="JUUL 1 Old vs New Packaging Comparison"
+                        fill
+                        className="object-cover rounded-2xl"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        priority
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.section>
